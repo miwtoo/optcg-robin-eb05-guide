@@ -1,0 +1,13 @@
+---
+import ChapterPage from "../components/ChapterPage.astro";
+import ReferenceList from "../content/chapters/reference-list.mdx";
+---
+
+<ChapterPage
+  title="One published example"
+  active="reference-list"
+  previous={{ href: "play-lines", title: "Play lines" }}
+  next={{ href: "test-plan", title: "Test plan" }}
+>
+  <ReferenceList />
+</ChapterPage>

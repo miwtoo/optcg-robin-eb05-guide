@@ -38,7 +38,8 @@ document.querySelectorAll<HTMLElement>("[data-lesson]").forEach((lesson) => {
 
   const show = (index: number): void => {
     current = Math.max(0, Math.min(steps.length - 1, index));
-    copy.textContent = `Step ${current + 1}: ${steps[current]?.textContent ?? ""}`;
+    const caption = steps[current]?.dataset.short ?? steps[current]?.textContent ?? "";
+    copy.textContent = `Step ${current + 1} / ${steps.length}: ${caption}`;
     count.textContent = `${current + 1} / ${steps.length}`;
     back.disabled = current === 0;
     next.disabled = current === steps.length - 1;
@@ -88,6 +89,11 @@ document.querySelectorAll<HTMLElement>("[data-lesson]").forEach((lesson) => {
       const needed = power === "6" ? 1 : 2;
       const after = needed === 1 ? 7 : 9;
       math.textContent = `${power}k attack → rest ${needed} active DON!! (+${needed * 2}k) → Luffy is ${after}k. Enough to stop this attack, before counters or other modifiers. Condition: DON!!×1 attached and 5 or fewer active DON!!. This ability can be used again in another battle.`;
+      lesson.querySelectorAll<HTMLElement>("[data-don-pip]").forEach((pip) => {
+        const number = Number(pip.dataset.donPip ?? 0);
+        pip.classList.toggle("spent", number > 0 && number <= needed);
+        pip.setAttribute("aria-label", number <= needed ? "Rested for this battle" : "Still active");
+      });
     };
     powerButtons.forEach((button) => {
       button.addEventListener("click", () => {

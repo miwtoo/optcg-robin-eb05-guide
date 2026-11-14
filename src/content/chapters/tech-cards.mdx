@@ -1,0 +1,89 @@
+import TechCard from "../../components/TechCard.astro";
+import { cardImage } from "../card-images";
+
+<section class="chapter-content">
+  <div class="chapter-intro"><span class="kicker">03 / Tech cards</span><h2>Read the job and the cost.</h2><p>Open a card for its text, what it asks from your list, and the example that put it on this map. Filter by job. These are useful options, not every card that could work.</p></div>
+  <p class="subtle">Open a card for its text, what it asks from your list, and the example that put it on this map. Filter by job. This catalog is useful options, not every card that could work.</p>
+  <div class="tech-filter" role="group" aria-label="Filter tech cards">
+    <button type="button" data-tech-filter="all" aria-pressed="true">All cards</button>
+    <button type="button" data-tech-filter="search" aria-pressed="false">Find cards</button>
+    <button type="button" data-tech-filter="life" aria-pressed="false">Life + defense</button>
+    <button type="button" data-tech-filter="pressure" aria-pressed="false">Pressure</button>
+    <button type="button" data-tech-filter="control" aria-pressed="false">Control</button>
+    <button type="button" data-tech-filter="recursion" aria-pressed="false">Trash + return</button>
+    <span id="tech-count" class="fine" aria-live="polite"></span>
+  </div>
+  <div class="tech-grid">
+    <TechCard name="Rayleigh" id="OP14-108" image={cardImage("OP14-108")} role="Yellow · 6 cost · 6,000 Slash · +1,000 counter · Trigger" tags="pressure control" href="https://onepiece.limitlesstcg.com/cards/OP14-108" evidence="Two in Nakaji's published 5–0 list; four in Dalen's Nov 12 winner.">
+      <p><b>Text:</b> On play, if your leader is multicolor and the opponent has three or less life, KO one opposing character with 7,000 or less base power. Its Trigger activates the On Play effect; it does not play Rayleigh.</p>
+      <p><b>Consider if:</b> you want a late answer. <b>Limit:</b> the life and base-power checks matter. It is not Wisdom.</p>
+      <p><b>Build cost:</b> six DON!! and a non-Wisdom slot; it does not fit six-cost Robin or the leader's Wisdom effect.</p>
+    </TechCard>
+    <TechCard name="Teach" id="OP16-119" image={cardImage("OP16-119")} role="Yellow · 8 cost · 10,000 Special · no counter · Trigger" tags="control life" href="https://onepiece.limitlesstcg.com/cards/OP16-119" evidence="OPlay simulator list 2 and Suda's published team-event list.">
+      <p><b>Text:</b> On play, look at the top three cards. Put up to one on top of life and the rest on the bottom. Its Trigger negates one opposing character's effect for the turn, then can KO a character costing five or less. The two targets need not be the same.</p>
+      <p><b>Consider if:</b> you want a large body and a way to stop a character effect. <b>Limit:</b> eight cost, no counter, and not Wisdom. Robin cannot play it.</p>
+    </TechCard>
+    <TechCard name="Borsalino" id="EB04-058" image={cardImage("EB04-058")} role="Yellow · 5 cost · 6,000 Special · +1,000 counter · Blocker" tags="life control" href="https://onepiece.limitlesstcg.com/cards/EB04-058" evidence="Two in the OPlay simulator list 2 and Dalen's winning list.">
+      <p><b>Text:</b> Blocker. On play, if you have two or less life, add up to one top card of your deck to life.</p>
+      <p><b>Consider if:</b> a body that can block and restore life helps your plan. <b>Limit:</b> the life check is late; Borsalino is not Wisdom.</p>
+      <p><b>Build cost:</b> Robin cannot play it, though Law can play this five-cost card rested. It does not qualify for Robin's Wisdom effect.</p>
+    </TechCard>
+    <TechCard name="Nico Olvia" id="EB05-056" image={cardImage("EB05-056")} role="Yellow · 1 cost · 0 power · Wisdom · +2,000 counter · Trigger" tags="life search" href="https://onepiece.limitlesstcg.com/cards/EB05-056" evidence="OPlay simulator lists and Dalen's published winner.">
+      <p><b>Text:</b> On play, trash one Trigger card from hand. If your leader is Nico Robin, draw two. Its Trigger plays Olvia.</p>
+      <p><b>Consider if:</b> you want to turn a Trigger in hand into cards. <b>Limit:</b> you need both the right hand card and Nico Robin as leader; the On Play cost is real.</p>
+      <p><b>Build cost:</b> a low-power body, but it is Wisdom and a +2,000 counter.</p>
+    </TechCard>
+    <TechCard name="Baby 5" id="OP12-112" image={cardImage("OP12-112")} role="Yellow · 4 cost · 5,000 Special · +2,000 counter · Trigger" tags="life" href="https://onepiece.limitlesstcg.com/cards/OP12-112" evidence="Four in the OPlay simulator list 2.">
+      <p><b>Text:</b> its Trigger draws two if your leader is multicolor. The Trigger does not play Baby 5.</p>
+      <p><b>Consider if:</b> you value a +2,000 counter and a possible hand refill. <b>Limit:</b> the Trigger draws but adds no body. Baby 5 is not Wisdom.</p>
+      <p><b>Build cost:</b> a four-cost yellow slot outside Robin's free-play line.</p>
+    </TechCard>
+    <TechCard name="Clover" id="OP09-102" image={cardImage("OP09-102")} role="Yellow · 1 cost · 0 power · Wisdom · +2,000 counter · Trigger" tags="search" href="https://onepiece.limitlesstcg.com/cards/OP09-102" evidence="Four in the OPlay simulator list 3.">
+      <p><b>Text:</b> On Play, if your leader is Nico Robin, look at the top three cards and reveal up to one Trigger card to add to hand; put the rest on the bottom. Its Trigger activates the On Play effect; it does not play Clover.</p>
+      <p><b>Consider if:</b> you want a low-cost Wisdom body that can find a Trigger. <b>Limit:</b> needs a Robin leader and a Trigger in those three cards.</p>
+      <p><b>Build cost:</b> a slot that could be a different searcher or defense.</p>
+    </TechCard>
+    <TechCard name="Nami" id="EB03-053" image={cardImage("EB03-053")} role="Yellow · 5 cost · 6,000 Special · +1,000 counter · no Trigger" tags="pressure life" href="https://onepiece.limitlesstcg.com/cards/EB03-053" evidence="Four in Nakaji's published 5–0 list.">
+      <p><b>Text:</b> On play, give up to one rested DON!! to your leader. If the opponent has three or more life, add up to one top card of their life to their hand. On KO, you may turn your top life card face up to play a character from hand with current power 6,000 or less.</p>
+      <p><b>Consider if:</b> this pressure and On KO play fit your turn. <b>Limit:</b> the opponent gets a card from life to hand; it is not damage.</p>
+      <p><b>Build cost:</b> not Wisdom, so Robin cannot play it; Law can play a five-cost Nami rested. Its On KO needs a top life card and a legal character.</p>
+    </TechCard>
+    <TechCard name="Monkey D. Luffy" id="OP15-119" image={cardImage("OP15-119")} role="Yellow · 5 cost · 7,000 Strike · no counter · no Trigger" tags="pressure" href="https://onepiece.limitlesstcg.com/cards/OP15-119" evidence="Two in Nakaji's published 5–0 list.">
+      <p><b>Text:</b> gains Rush if you have six or more DON!! on the field. When the opponent activates an Event or Blocker, reveal up to one top life card and gain +1,000 power for each cost on it this turn.</p>
+      <p><b>Consider if:</b> you want another way to attack late. <b>Limit:</b> no counter, not Wisdom, and a leader ability is not an Event or Blocker. The RG Luffy leader's defense alone will not trigger this power increase.</p>
+      <p><b>Build cost:</b> a five-cost, non-Wisdom pressure slot.</p>
+    </TechCard>
+    <TechCard name="Perona" id="OP14-111" image={cardImage("OP14-111")} role="Yellow · 4 cost · 5,000 Special · +1,000 counter · Trigger" tags="control recursion" href="https://onepiece.limitlesstcg.com/cards/OP14-111" evidence="Suda's listed 5–0 Heroines Cup 3v3 team list; not open-field 1v1 proof.">
+      <p><b>Text:</b> On play or KO, an opposing character costing six or less cannot attack until the end of the opponent's next End Phase. Its Trigger plays a Thriller Bark character costing four or less from trash, rested.</p>
+      <p><b>Consider if:</b> delaying an attack buys the turn you need. <b>Limit:</b> it does not rest or remove the character. It does not clear Captain John's redirect effect.</p>
+      <p><b>Build cost:</b> a Thriller Bark slot; its Trigger needs a legal card in trash.</p>
+    </TechCard>
+    <TechCard name="Dr. Hogback" id="OP14-110" image={cardImage("OP14-110")} role="Yellow · 4 cost · 5,000 Wisdom · +1,000 counter · Trigger" tags="recursion life" href="https://onepiece.limitlesstcg.com/cards/OP14-110" evidence="Suda's listed 5–0 team event list.">
+      <p><b>Text:</b> On KO, play a Trigger character costing four or less from trash, except Dr. Hogback. Its Trigger plays a Thriller Bark character costing four or less from trash, rested.</p>
+      <p><b>Consider if:</b> you want an On KO effect and have legal cards to return. It is Wisdom, so check Robin's normal power and Blocker conditions.</p>
+      <p><b>Limit / build cost:</b> depends on cards in trash and several package slots. Non-KO removal does not activate On KO.</p>
+    </TechCard>
+    <TechCard name="Gecko Moria" id="OP14-104" image={cardImage("OP14-104")} role="Yellow · 8 cost · 10,000 Special · no counter · Trigger" tags="recursion life" href="https://onepiece.limitlesstcg.com/cards/OP14-104" evidence="Suda's listed 5–0 team event list.">
+      <p><b>Text:</b> On Play, choose up to one cost-four-or-less Thriller Bark character from trash: play it or add that character to the top of your life face up. Its Trigger plays a cost-four-or-less character from trash.</p>
+      <p><b>Consider if:</b> your list has useful Thriller Bark cards in trash. <b>Limit:</b> eight DON!! and a package of other cards.</p>
+      <p><b>Rules note:</b> check official rules before planning around a face-up Life card's later Trigger. This guide does not assume face-up Life still triggers.</p>
+    </TechCard>
+    <TechCard name="Oven" id="OP17-102" image={cardImage("OP17-102")} role="Yellow · 4 cost · 4,000 Special · +1,000 counter · Trigger" tags="recursion" href="https://onepiece.limitlesstcg.com/cards/OP17-102" evidence="OPlay simulator list 3; the list alone does not explain its job.">
+      <p><b>Text:</b> On KO, play one character with current power 4,000 or less from trash, except Charlotte Oven. Its Trigger plays Oven.</p>
+      <p><b>Consider if:</b> you want to reuse a small character. <b>Limit:</b> the On KO effect does not happen if Oven leaves another way; it is not restricted to Trigger characters or cost-four cards.</p>
+      <p><b>Build cost:</b> a four-cost character slot that is not itself Wisdom.</p>
+    </TechCard>
+    <TechCard name="Charlotte Linlin" id="OP17-112" image={cardImage("OP17-112")} role="Yellow · 10 cost · 12,000 Special · no counter · no Trigger" tags="life pressure" href="https://onepiece.limitlesstcg.com/cards/OP17-112" evidence="Baseline Toryu list and OPlay simulator list 3.">
+      <p><b>Text:</b> on your turn, your Trigger characters with 4,000 base power become 8,000 base power. On Play, draw one, then choose: add one life or add the opponent's top life card to their hand.</p>
+      <p><b>Consider if:</b> your Trigger characters and life choice fit the board. <b>Limit:</b> the power change is only on your turn; Linlin is ten cost, has no counter, and is not Wisdom.</p>
+      <p><b>Build cost:</b> high-end curve slots. Its increase can put an eligible Wisdom character above Robin's 6,000 restand limit while it lasts.</p>
+    </TechCard>
+    <TechCard name="Nico Robin" id="EB03-055" image={cardImage("EB03-055")} role="Yellow · 7 cost · 8,000 Strike · no counter · no Trigger" tags="life control" href="https://onepiece.limitlesstcg.com/cards/EB03-055" evidence="Two in the OPlay simulator list 2.">
+      <p><b>Text:</b> On Play, you may trash your top life card; if your leader is Straw Hat, add up to two cards from deck top to life. On the opponent's turn, when this character is KO'd, you may deal one damage to the opponent.</p>
+      <p><b>Consider if:</b> the extra life and optional KO effect fit your plan. <b>Limit:</b> paying one life to add up to two is not the same as healing two for free; it needs a top life card.</p>
+      <p><b>Build cost:</b> seven DON!! and a non-Wisdom slot. It is not a free play for six-cost Robin.</p>
+    </TechCard>
+  </div>
+  <p id="tech-empty" class="fine" hidden>No cards in this filter.</p>
+  <p class="source-note">Images: One Piece Top Decks card gallery. Card IDs link to Limitless text pages. The lists above are samples, not a census.</p>
+</section>

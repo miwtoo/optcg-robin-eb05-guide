@@ -1,0 +1,21 @@
+---
+import GuideLayout from "../layouts/GuideLayout.astro";
+
+interface Neighbor {
+  href: string;
+  title: string;
+}
+
+interface Props {
+  title: string;
+  active: string;
+  previous?: Neighbor;
+  next?: Neighbor;
+}
+
+const { title, active, previous, next } = Astro.props;
+---
+
+<GuideLayout title={title} active={active} previous={previous} next={next}>
+  <slot />
+</GuideLayout>

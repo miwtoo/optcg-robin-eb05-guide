@@ -4,8 +4,10 @@ A static Astro site with MDX content.
 
 ## Edit the guide
 
-- `src/content/guide.mdx`: guide text, sources, card choices, and lesson steps.
-- `src/components/`: card diagrams, filters, reference list, and test log.
+- `src/pages/`: the overview and chapter routes.
+- `src/content/chapters/`: editable MDX for core ideas, build styles, tech cards, matchups, play lines, the optional list, testing, and sources.
+- `src/components/`: overview flow, card diagrams, filters, reference list, and test log.
+- `src/content/card-images.ts`: shared card-art URLs.
 - `src/scripts/guide.ts`: interactive controls.
 - `src/styles/guide.css`: layout and visual styles.
 - `AGENTS.md`: writing, card accuracy, and implementation rules.

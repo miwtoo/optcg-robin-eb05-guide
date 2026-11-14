@@ -1,0 +1,27 @@
+---
+import { cardImage } from "../content/card-images";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const steps = [
+  { title: "Find", detail: "Search Wisdom", id: "EB05-050", alt: "Atlas EB05-050 card art", href: "core-ideas/" },
+  { title: "Build", detail: "Robin → Nami", id: "EB05-016", alt: "Nico Robin EB05-016 card art", href: "play-lines/" },
+  { title: "Pressure", detail: "Choose an attack", id: "OP17-022", alt: "Shanks OP17-022 card art", href: "rg-luffy/" },
+  { title: "Recover", detail: "After eligible KO", id: "EB05-010", alt: "Nico Robin EB05-010 leader card art", href: "core-ideas/" },
+];
+---
+
+<div class="overview-flow" aria-label="Robin plan: find, build, pressure, recover">
+  {steps.map((step, index) => (
+    <>
+      <a class="flow-step" href={`${base}${step.href}`} aria-label={`${step.title}: ${step.detail}`}>
+        <span class="flow-number">0{index + 1}</span>
+        <img src={cardImage(step.id)} alt={step.alt} loading="lazy" />
+        <strong>{step.title}</strong>
+        <span>{step.detail}</span>
+      </a>
+      {index < steps.length - 1 && <span class="flow-arrow" aria-hidden="true">→</span>}
+    </>
+  ))}
+</div>

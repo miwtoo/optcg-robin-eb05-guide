@@ -1,0 +1,13 @@
+---
+import ChapterPage from "../components/ChapterPage.astro";
+import Luffy from "../content/chapters/luffy.mdx";
+---
+
+<ChapterPage
+  title="Think through Red/Green Luffy"
+  active="rg-luffy"
+  previous={{ href: "rocks", title: "Blue Rocks" }}
+  next={{ href: "play-lines", title: "Play lines" }}
+>
+  <Luffy />
+</ChapterPage>

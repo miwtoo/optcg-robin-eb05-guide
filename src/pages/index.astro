@@ -1,8 +1,52 @@
 ---
 import GuideLayout from "../layouts/GuideLayout.astro";
-import Guide from "../content/guide.mdx";
+import OverviewFlow from "../components/OverviewFlow.astro";
+import { cardImage } from "../content/card-images";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 ---
 
-<GuideLayout>
-  <Guide />
+<GuideLayout title="Build a plan, not a fixed list" active="home" home>
+  <section class="section overview-section">
+    <div class="section-head">
+      <div><div class="kicker">The big picture</div><h2>Four jobs. One flexible plan.</h2></div>
+      <p class="subtle">Use this as a starting picture. You do not need every card shown here.</p>
+    </div>
+    <OverviewFlow />
+    <p class="fine overview-caption">Find a useful piece. Build the board. Choose how to pressure. Recover life only when Robin's KO condition is met.</p>
+  </section>
+  <section class="section">
+    <div class="section-head">
+      <div><div class="kicker">Choose your next question</div><h2>Where do you want to start?</h2></div>
+    </div>
+    <div class="chapter-cards">
+      <a class="chapter-card chapter-card--wide" href={`${base}core-ideas/`}>
+        <span class="chapter-index">01 / START HERE</span><h3>Core ideas</h3>
+        <p>See how search, Robin, Nami, and life fit together. Compare card roles without locking a list.</p>
+        <div class="chapter-pair"><img src={cardImage("EB05-016")} alt="Nico Robin EB05-016" loading="lazy"><span>+</span><img src={cardImage("EB05-055")} alt="Nami EB05-055" loading="lazy"></div>
+        <strong>Explore the engine →</strong>
+      </a>
+      <a class="chapter-card" href={`${base}build-styles/`}><span class="chapter-index">02 / CHOICES</span><h3>Build styles</h3><p>Compare published examples, simulator lists, and overlapping packages.</p><strong>Compare the paths →</strong></a>
+      <a class="chapter-card" href={`${base}tech-cards/`}><span class="chapter-index">03 / CARD TOOLBOX</span><h3>Tech cards</h3><p>Filter 14 options by job. Check each card's trade-off and evidence.</p><strong>Open the card guide →</strong></a>
+      <a class="chapter-card" href={`${base}rocks/`}><span class="chapter-index">04 / MATCHUP</span><h3>Blue Rocks</h3><p>Read the Kyo, Captain John, and Gloriosa interactions before choosing a line.</p><strong>Think through Rocks →</strong></a>
+      <a class="chapter-card" href={`${base}rg-luffy/`}><span class="chapter-index">05 / MATCHUP</span><h3>Red/Green Luffy</h3><p>See what a wide or tall attack can ask Luffy to spend. Nothing forces the choice.</p><strong>Count the defense →</strong></a>
+      <a class="chapter-card" href={`${base}play-lines/`}><span class="chapter-index">06 / SEE IT</span><h3>Play lines</h3><p>Move cards through a clear board picture. Use steps, pause, or replay.</p><strong>Open the visual lessons →</strong></a>
+      <a class="chapter-card" href={`${base}reference-list/`}><span class="chapter-index">07 / OPTIONAL</span><h3>Example list</h3><p>One published 50-card reference. Open it only if you want a concrete starting point.</p><strong>View the reference →</strong></a>
+      <a class="chapter-card" href={`${base}test-plan/`}><span class="chapter-index">08 / PRACTICE</span><h3>Test one idea</h3><p>Change one package, keep notes, and let the results change your mind.</p><strong>Plan a fair test →</strong></a>
+      <a class="chapter-card" href={`${base}sources/`}><span class="chapter-index">09 / CHECK</span><h3>Sources & limits</h3><p>Open the public data, reported lists, card text, and evidence notes.</p><strong>See the sources →</strong></a>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-head">
+      <div><div class="kicker">Snapshot · Nov 11, 2026</div><h2>Data can point to a question.</h2></div>
+      <p class="subtle">OPlayTCG ranked, 7-day view. Aggregate results are not tournament win rates or proof of cause.</p>
+    </div>
+    <div class="snapshot-grid">
+      <article class="snapshot"><span>Overall</span><strong>52.8%</strong><small>62,464 games · 4,823 players</small></article>
+      <article class="snapshot"><span>vs RG Luffy</span><strong>46%</strong><small>7,707 games · first 46.4%, second 46.5%</small></article>
+      <article class="snapshot"><span>vs Rocks</span><strong>48%</strong><small>6,040 games · first 47.9%, second 47.8%</small></article>
+    </div>
+  </section>
 </GuideLayout>

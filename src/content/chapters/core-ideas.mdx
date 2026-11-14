@@ -1,0 +1,81 @@
+import ChoiceCard from "../../components/ChoiceCard.astro";
+
+<section class="section" id="readout">
+  <div class="section-head">
+    <div><div class="kicker">01 / Why Robin</div><h2>Access, board, and life.</h2></div>
+    <p class="subtle">A plan for turning a good hand into choices on later turns.</p>
+  </div>
+  <div class="callout">
+    <strong>The working idea:</strong> one set of cards can link search, board, and life.
+    Six-cost Nico Robin can bring Nami from hand. Nami can put the top card of your deck
+    on top of your life. Once per turn, Robin's leader can do the same when a Wisdom
+    character without Blocker is KO'd. This can help you keep playing—but costs turns
+    and DON!!, and is not proof of a good matchup.
+  </div>
+  <div class="cards spaced">
+    <article class="panel">
+      <h3>What the numbers say</h3>
+      <div class="stat"><b>52.8%</b><span>Robin overall · 62,464 games · 4,823 players</span></div>
+      <p>Ranked, 7-day view, updated Nov 11, 2026.</p>
+    </article>
+    <article class="panel">
+      <h3>What the numbers cannot say</h3>
+      <p><strong>46%</strong> vs RG Luffy (7,707 games; first 46.4%, second 46.5%) and
+      <strong>48%</strong> vs Rocks (6,040 games; first 47.9%, second 47.8%). The data
+      does not control for the exact list, player, or event.</p>
+      <p>Use these as reasons to practice—not as proof the matchups are bad or that one
+      list is best.</p>
+    </article>
+  </div>
+  <div class="split spaced">
+    <article class="panel"><h3>Ask before a turn</h3><p>What do I need to do now: find a missing engine card, keep a useful body, answer a threat, or save DON!! for defense?</p></article>
+    <article class="panel"><h3>Then name the cost</h3><p>Every choice uses something: DON!!, a card from hand, a turn of setup, or space for another answer. A strong plan sees both the gain and the cost.</p></article>
+  </div>
+</section>
+
+<section class="section" id="roles">
+  <div class="section-head">
+    <div><div class="kicker">02 / Card jobs and trade-offs</div><h2>Choose a job. Choose a card.</h2></div>
+    <p class="subtle">These are options to think about, not required counts. Open a card to see what it adds, what it costs, and what to watch in testing.</p>
+  </div>
+  <div class="choice-grid">
+    <ChoiceCard title="Find the right cards" subtitle="Atlas · Lilith">
+      <p><b>Problem:</b> your opening hand cannot reach the part you need.</p>
+      <p><b>Candidate cards:</b> Atlas costs one and looks at the top four for a Wisdom character. Lilith also costs one and looks at the top four for a Trigger card other than Lilith. Nico Robin and Nami fit both search rules.</p>
+      <p><b>Gain:</b> more looks at the engine pieces you need. <b>Give up:</b> a searcher takes a slot that could be defense or a threat, and can feel weak when you already have the pieces.</p>
+      <p><b>Test:</b> record what each search finds and what you still lack. <b>Change your mind if:</b> searches often miss the needed role, or you keep drawing searchers without a useful next play.</p>
+    </ChoiceCard>
+    <ChoiceCard title="Build the Robin–Nami line" subtitle="Six-cost Robin · Nami">
+      <p><b>Problem:</b> you need to build board and recover life.</p>
+      <p><b>Candidate cards:</b> six-cost Nico Robin can play a cost-five-or-less Wisdom card from hand. Nami is a five-cost Wisdom card. On play, Nami can move the top card of your deck to the top of life when your leader has Wisdom.</p>
+      <p><b>Gain:</b> develop two characters in one turn, then add life. <b>Give up:</b> six DON!! and a Nami in hand. The line may be too slow when you need defense or a different board answer.</p>
+      <p><b>Test:</b> note when Robin and Nami are both ready, and what threat you left unanswered. <b>Change your mind if:</b> the line keeps arriving late or does not help you survive the next turn.</p>
+    </ChoiceCard>
+    <ChoiceCard title="Answer a rested body" subtitle="Megalo">
+      <p><b>Problem:</b> an opposing character is already rested and is at 8,000 power or less.</p>
+      <p><b>Candidate card:</b> Megalo. On play, it may rest itself to KO one legal rested character.</p>
+      <p><b>Gain:</b> remove that target. <b>Give up:</b> four DON!! and a body with a +2,000 counter that you could have kept in hand. No legal target? The on-play removal does not help.</p>
+      <p><b>Test:</b> record how often a legal target exists when you draw Megalo. <b>Change your mind if:</b> it sits in hand as a counter, or the target is usually not rested.</p>
+    </ChoiceCard>
+    <ChoiceCard title="Open a late attack window" subtitle="Shanks">
+      <p><b>Problem:</b> you need a large attacker and a turn with fewer opposing characters ready.</p>
+      <p><b>Candidate card:</b> Shanks is ten cost, 12,000 power, and has Rush. On play, it reactivates up to two of your DON!!, then rests all opposing characters.</p>
+      <p><b>Gain:</b> it can attack that turn and may leave DON!! for a defensive event. It rests characters; it does not KO them or rest the opposing leader. <b>Give up:</b> an expensive card with no counter that may sit in hand early.</p>
+      <p><b>Test:</b> did Shanks create a close, or did you need its slot earlier? <b>Change your mind if:</b> it is still in hand when you lose or there is no useful attack after it rests the board.</p>
+    </ChoiceCard>
+    <ChoiceCard title="Add a blocker in a tight game" subtitle="Trafalgar Law">
+      <p><b>Problem:</b> you need a defensive body or another on-play character.</p>
+      <p><b>Candidate card:</b> Law gains Blocker only when you have one life or less. On play, it may return one of your characters to hand; if you do, play up to one cost-five-or-less character from hand rested.</p>
+      <p><b>Gain:</b> a late Blocker or a way to reuse a useful body. <b>Give up:</b> six DON!!, a character returned from your field, and a new rested body. It has no printed counter.</p>
+      <p><b>Test:</b> record when the life condition is met and what body you returned. <b>Change your mind if:</b> the blocker condition arrives too late or returning a body slows you down.</p>
+    </ChoiceCard>
+    <ChoiceCard title="Draw, gain life, or lower power" subtitle="Sweet 3 Generals">
+      <p><b>Problem:</b> your hand, life, or board needs help on your turn.</p>
+      <p><b>Candidate card:</b> Sweet 3 Generals is a six-cost Slash/Strike character, not Wisdom, with a +1,000 counter. On your turn, its On Play may rest two DON!! to draw one, add up to one top card to life, then give up to two opposing characters −3,000 power for the turn.</p>
+      <p><b>Gain:</b> several useful effects in one card. <b>Give up:</b> two DON!! that cannot fund another play. Six-cost Robin cannot play it.</p>
+      <p><b>Test:</b> record whether the draw, life, or power drop changed the turn. <b>Change your mind if:</b> resting two DON!! leaves no useful follow-up.</p>
+    </ChoiceCard>
+  </div>
+  <p class="fine spaced">A package is a group of cards that solves one job. Add or remove a package to answer a problem you can name. Do not change several jobs at once and guess which change mattered.</p>
+  <p class="fine"><strong>Track the card pool:</strong> how many Wisdom cards Atlas can find; how many Trigger cards Lilith can find; how often your hand has a useful 2,000 counter; and how often high-cost cards arrive before you can use them. Record search results from each game. Do not assume a certain count is best.</p>
+</section>

@@ -1,0 +1,14 @@
+---
+import ChapterPage from "../components/ChapterPage.astro";
+import CoreIdeas from "../content/chapters/core-ideas.mdx";
+import Rules from "../content/chapters/rules.mdx";
+---
+
+<ChapterPage
+  title="Core ideas"
+  active="core-ideas"
+  next={{ href: "build-styles", title: "Build styles" }}
+>
+  <CoreIdeas />
+  <Rules />
+</ChapterPage>

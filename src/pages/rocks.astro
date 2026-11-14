@@ -1,0 +1,13 @@
+---
+import ChapterPage from "../components/ChapterPage.astro";
+import Rocks from "../content/chapters/rocks.mdx";
+---
+
+<ChapterPage
+  title="Think through Blue Rocks"
+  active="rocks"
+  previous={{ href: "tech-cards", title: "Tech cards" }}
+  next={{ href: "rg-luffy", title: "Red/Green Luffy" }}
+>
+  <Rocks />
+</ChapterPage>

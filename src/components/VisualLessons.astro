@@ -1,12 +1,15 @@
 ---
+import { cardImage } from "../content/card-images";
+
 interface Lesson {
   key: string;
   title: string;
   subtitle: string;
   card: string;
   cardName: string;
-  steps: string[];
   kind: "robin" | "leader" | "megalo" | "luffy" | "shanks";
+  captions: string[];
+  steps: string[];
 }
 
 interface Props {
@@ -14,8 +17,7 @@ interface Props {
 }
 
 const { lessons } = Astro.props;
-const gallery = (id: string) =>
-  `https://onepiecetopdecks.com/wp-content/gallery/${id.slice(0, 4).toLowerCase()}/${id}.jpg`;
+const image = (id: string) => cardImage(id);
 ---
 
 <label class="motion-setting"><input type="checkbox" id="motion-toggle" /> Motion on</label>
@@ -23,38 +25,102 @@ const gallery = (id: string) =>
   {lessons.map((lesson) => (
     <article class="lesson" data-lesson data-kind={lesson.kind}>
       <div class="lesson-top">
-        <img src={gallery(lesson.card)} alt={`${lesson.cardName}, ${lesson.card} card art`} loading="lazy" />
+        <img src={image(lesson.card)} alt={`${lesson.cardName}, ${lesson.card} card art`} loading="lazy" />
         <div>
           <span class="kicker">{lesson.key}</span>
           <h3>{lesson.title}</h3>
           <p>{lesson.subtitle}</p>
         </div>
       </div>
-      {lesson.kind === "luffy" && (
-        <div class="power-toggle" role="group" aria-label="Choose incoming attack">
-          <span>Incoming attack:</span>
-          <button type="button" data-power="6" aria-pressed="true">6k</button>
-          <button type="button" data-power="8" aria-pressed="false">8k</button>
+
+      {lesson.kind === "robin" && (
+        <div class="visual-board visual-board--flow" aria-label="Hand to field to life">
+          <div class="board-zone">
+            <span class="zone-label">HAND</span>
+            <figure class="token" data-steps="1,2"><img src={image("EB05-016")} alt="Nico Robin in hand" /><figcaption>Robin</figcaption></figure>
+            <figure class="token" data-steps="1,2"><img src={image("EB05-055")} alt="Nami in hand" /><figcaption>Nami</figcaption></figure>
+          </div>
+          <span class="board-arrow" aria-hidden="true">→</span>
+          <div class="board-zone">
+            <span class="zone-label">FIELD</span>
+            <figure class="token" data-steps="2,3,4"><img src={image("EB05-016")} alt="Nico Robin on the field" /><figcaption>Robin</figcaption></figure>
+            <figure class="token" data-steps="3,4"><img src={image("EB05-055")} alt="Nami on the field" /><figcaption>Nami</figcaption></figure>
+          </div>
+          <span class="board-arrow" aria-hidden="true">→</span>
+          <div class="board-zone">
+            <span class="zone-label">LIFE</span>
+            <figure class="token" data-steps="4"><span class="life-card">TOP CARD</span><figcaption>+1 card</figcaption></figure>
+            <span class="empty-note" data-steps="1,2,3">Wait for Nami</span>
+          </div>
+          <div class="don-row"><span>6 DON!!</span>{Array.from({ length: 6 }, (_, index) => <span class="don-pip" data-steps="1" aria-label={`${index + 1} active DON`}>●</span>)}{Array.from({ length: 6 }, (_, index) => <span class="don-pip spent" data-steps="2,3,4" aria-label={`${index + 1} spent DON`}>●</span>)}<span data-steps="1">active</span><span data-steps="2,3,4">spent on Robin</span></div>
         </div>
       )}
-      <div class="lesson-board">
-        <div class="zone"><div class="zone-name">Card</div><div class="zone-content">
-          <figure class="token on" data-steps="1"><img src={gallery(lesson.card)} alt="" /><figcaption>{lesson.cardName}</figcaption></figure>
-          {lesson.kind === "robin" && <figure class="token" data-steps="2,3,4"><img src={gallery("EB05-055")} alt="" /><figcaption>Nami · 5-cost Wisdom</figcaption></figure>}
-        </div></div>
-        <div class="zone"><div class="zone-name">Board / choice</div><div class="zone-content">
-          <span class="empty-note" data-steps="1">{lesson.kind === "luffy" ? "5k base leader" : "Check the card text"}</span>
-          <span class="rest-chip" data-steps="2,3,4">{lesson.kind === "shanks" ? "Characters rested" : "Effect resolves"}</span>
-        </div></div>
-        <div class="zone"><div class="zone-name">Next step</div><div class="zone-content">
-          <span class="empty-note" data-steps="1">Read the condition</span>
-          <span class="empty-note" data-steps="2,3,4">Name the cost</span>
-        </div></div>
-      </div>
-      {lesson.kind === "luffy" && <p class="math" data-math aria-live="polite"></p>}
-      <ol class="lesson-steps">
-        {lesson.steps.map((step) => <li>{step}</li>)}
-      </ol>
+
+      {lesson.kind === "leader" && (
+        <div class="visual-board visual-board--two">
+          <div class="board-zone">
+            <span class="zone-label">WISDOM CHARACTER</span>
+            <figure class="token" data-steps="1"><img src={image("EB05-016")} alt="Wisdom character before KO" /><figcaption>KO'd · no Blocker</figcaption></figure>
+            <span class="ko-stamp" data-steps="2">KO</span>
+            <figure class="token" data-steps="3,4"><img src={image("EB05-016")} alt="Rested Wisdom character at 6,000 power" /><figcaption>Rested · ≤6,000</figcaption></figure>
+          </div>
+          <span class="board-arrow" aria-hidden="true">→</span>
+          <div class="board-zone">
+            <span class="zone-label">LIFE / ACTIVE</span>
+            <figure class="token" data-steps="2"><span class="life-card">TOP CARD</span><figcaption>+1 Life</figcaption></figure>
+            <figure class="token" data-steps="4"><img src={image("EB05-016")} alt="Wisdom character set active" /><figcaption>Set active</figcaption></figure>
+          </div>
+          <div class="leader-rule"><img src={image("EB05-010")} alt="Nico Robin leader card art" loading="lazy" /><span>Two separate once-per-turn effects</span></div>
+        </div>
+      )}
+
+      {lesson.kind === "megalo" && (
+        <div class="visual-board visual-board--flow">
+          <div class="board-zone">
+            <span class="zone-label">YOUR HAND</span>
+            <figure class="token" data-steps="1"><img src={image("EB04-018")} alt="Megalo in hand" /><figcaption>Megalo</figcaption></figure>
+            <figure class="token" data-steps="2,3,4"><img class="rested-card" src={image("EB04-018")} alt="Megalo rested by its On Play effect" /><figcaption>Rests itself</figcaption></figure>
+          </div>
+          <span class="board-arrow" aria-hidden="true">→</span>
+          <div class="board-zone">
+            <span class="zone-label">EXAMPLE TARGET</span>
+            <figure class="token" data-steps="1,2"><img class="rested-card" src={image("OP17-044")} alt="Captain John shown as an example rested target" /><figcaption>Rested · ≤8,000</figcaption></figure>
+            <span class="ko-stamp" data-steps="3,4">KO</span>
+            <span class="empty-note" data-steps="1">Must be rested first</span>
+          </div>
+          <div class="don-row"><span>4 DON!!</span>{Array.from({ length: 4 }, (_, index) => <span class="don-pip" data-steps="1" aria-label={`${index + 1} active DON`}>●</span>)}{Array.from({ length: 4 }, (_, index) => <span class="don-pip spent" data-steps="2,3,4" aria-label={`${index + 1} spent DON`}>●</span>)}<span data-steps="1">active</span><span data-steps="2,3,4">spent to play</span></div>
+          <p class="fine visual-footnote">Captain John is an example target. Check the target's state and power.</p>
+        </div>
+      )}
+
+      {lesson.kind === "luffy" && (
+        <div class="visual-board visual-board--luffy">
+          <div class="luffy-leader"><img src={image("OP13-001")} alt="Red/Green Luffy leader card art" loading="lazy" /><div><span class="zone-label">LEADER</span><strong>5,000 power</strong><span class="attached-don">1 DON!! attached</span></div></div>
+          <div class="attack-choice"><span class="zone-label">INCOMING ATTACK</span><div class="power-toggle" role="group" aria-label="Choose incoming attack"><button type="button" data-power="6" aria-pressed="true">6,000</button><button type="button" data-power="8" aria-pressed="false">8,000</button></div></div>
+          <div class="don-track"><span class="zone-label">5 ACTIVE DON!! · REST FOR THIS BATTLE</span><div>{Array.from({ length: 5 }, (_, index) => <span class="don-pip" data-don-pip={index + 1}>DON!!</span>)}</div></div>
+          <p class="math" data-math aria-live="polite"></p>
+          <p class="fine visual-footnote">No other power changes. Luffy may still counter or take the hit.</p>
+        </div>
+      )}
+
+      {lesson.kind === "shanks" && (
+        <div class="visual-board visual-board--shanks">
+          <div class="board-zone">
+            <span class="zone-label">YOUR PLAY</span>
+            <figure class="token" data-steps="1"><img src={image("OP17-022")} alt="Shanks before play" /><figcaption>10 DON!!</figcaption></figure>
+            <figure class="token" data-steps="2,3,4"><img src={image("OP17-022")} alt="Shanks played with Rush" /><figcaption>Rush</figcaption></figure>
+          </div>
+          <span class="board-arrow" aria-hidden="true">→</span>
+          <div class="board-zone">
+            <span class="zone-label">ROCKS FIELD</span>
+            <figure class="token" data-steps="1"><img src={image("OP17-044")} alt="Captain John active" /><figcaption>John active</figcaption></figure>
+            <figure class="token" data-steps="2,3,4"><img class="rested-card" src={image("OP17-044")} alt="Captain John rested by Shanks" /><figcaption>John rested</figcaption></figure>
+          </div>
+          <div class="redirect-line" data-steps="2,3,4"><span>LEADER ATTACK</span><b>↘</b><strong>CAPTAIN JOHN ONLY</strong></div>
+          <div class="don-row"><span>10 DON!!</span><span data-steps="1">ready</span><span data-steps="2,3,4">Pay 10 · up to 2 active again</span><span class="visual-footnote">All opposing characters rest</span></div>
+        </div>
+      )}
+
       <div class="lesson-copy" aria-live="polite"></div>
       <div class="lesson-controls">
         <button type="button" data-act="prev">Back</button>
@@ -62,6 +128,12 @@ const gallery = (id: string) =>
         <button type="button" data-act="next">Next</button>
         <span class="lesson-count"></span>
       </div>
+      <details class="rules-detail">
+        <summary>Read the rule and steps</summary>
+        <ol class="lesson-steps">
+          {lesson.steps.map((step, index) => <li data-short={lesson.captions[index]}>{step}</li>)}
+        </ol>
+      </details>
       <p class="source-note">Card art: One Piece Top Decks · Card text: {lesson.card}.</p>
     </article>
   ))}

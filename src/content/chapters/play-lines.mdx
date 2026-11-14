@@ -1,0 +1,88 @@
+import VisualLessons from "../../components/VisualLessons.astro";
+
+export const lessons = [
+  {
+    key: "A / Six-cost Robin",
+    title: "Play Nami from hand",
+    subtitle: "Robin costs six DON!!",
+    card: "EB05-016",
+    cardName: "Nico Robin",
+    kind: "robin",
+    captions: ["Robin + Nami in hand", "Spend 6 DON!!", "Build two Wisdom bodies", "Add 1 card to Life"],
+    steps: [
+      "Start with Nico Robin and Nami in your hand. Have six DON!! active.",
+      "Play the six-cost Nico Robin. Spend six DON!!.",
+      "Robin's On Play effect plays Nami from your hand. Nami costs five and has Wisdom.",
+      "Nami's On Play effect puts the top card of your deck on top of your life. Your leader must have Wisdom.",
+    ],
+  },
+  {
+    key: "B / Robin leader",
+    title: "Two separate rules",
+    subtitle: "KO life · restand power limit",
+    card: "EB05-010",
+    cardName: "Nico Robin leader",
+    kind: "leader",
+    captions: ["Wisdom body is KO'd", "Add 1 card to Life", "Separate: restand ≤6k", "Check power first"],
+    steps: [
+      "A Wisdom character without Blocker is KO'd. Robin's once-per-turn leader effect can trigger.",
+      "Put the top card of your deck on top of your life. Bounce, bottom-deck, or trash is not a KO.",
+      "Separate line: set one rested Wisdom character with current power 6,000 or less as active once per turn.",
+      "Check power before restand. If DON!! would raise it over 6,000, restand first, then attach DON!!.",
+    ],
+  },
+  {
+    key: "C / Megalo",
+    title: "On play, not on restand",
+    subtitle: "It needs a rested target",
+    card: "EB04-018",
+    cardName: "Megalo",
+    kind: "megalo",
+    captions: ["Find a rested target", "Play Megalo · rest it", "KO target ≤8k", "Restand does not repeat"],
+    steps: [
+      "Check for an opposing character that is already rested and has 8,000 power or less.",
+      "Play Megalo for four DON!!. Its On Play effect may rest Megalo itself.",
+      "KO the rested target. If no legal target exists, this removal line is not available.",
+      "Restanding Megalo does not repeat its On Play effect. It cannot attack the turn it enters play unless an effect allows it.",
+    ],
+  },
+  {
+    key: "D / RG Luffy defense",
+    title: "Power math each battle",
+    subtitle: "Toggle the attack size",
+    card: "OP13-001",
+    cardName: "Monkey D. Luffy leader",
+    kind: "luffy",
+    captions: ["Check attached DON!!", "Rest DON!! for +2k", "Repeat in another battle"],
+    steps: [
+      "Check the condition: one or more DON!! attached to Luffy, and five or fewer active DON!!.",
+      "DON!!×1 is the attached-DON!! condition, not a payment. Rest one active DON!! to add 2k: 5k becomes 7k, enough to stop 6k.",
+      "Against 8k, rest two active DON!! for +4k: 5k becomes 9k. Each use is for this battle only; the ability is not once per turn.",
+    ],
+  },
+  {
+    key: "E / Shanks",
+    title: "Rest the board, not the leader",
+    subtitle: "10-cost · 12k · Rush",
+    card: "OP17-022",
+    cardName: "Shanks",
+    kind: "shanks",
+    captions: ["Keep 10 DON!! ready", "Shanks rests all characters", "John redirects attacks", "Choose your attack"],
+    steps: [
+      "Have ten DON!! to play Shanks. A normal four-cost Megalo does not also fit this turn.",
+      "Play 10-cost Shanks. It has Rush. Its On Play reactivates up to two DON!!, then rests all opposing characters.",
+      "It rests characters, not the opposing leader. It does not KO or remove those characters.",
+      "Use Shanks' Rush attack. Keep reopened DON!! for a defensive event if that is your plan.",
+    ],
+  },
+];
+
+<section class="chapter-content">
+  <div class="section-head">
+    <div><div class="kicker">05 / Play lines</div><h2>See the move.</h2></div>
+    <p class="subtle">Press “Play steps” or use Next. The short lesson still makes sense with animation off.</p>
+  </div>
+  <p class="visual-intro">These diagrams show the card and the choices around it. They use real card art. Press Play once to watch one short sequence. Press Pause to stop it. Use Replay to start again.</p>
+  <VisualLessons lessons={lessons} />
+  <p class="source-note">Card images are hosted by <a href="https://onepiecetopdecks.com/" target="_blank" rel="noopener">One Piece Top Decks</a>. Each image is labeled with its card ID.</p>
+</section>

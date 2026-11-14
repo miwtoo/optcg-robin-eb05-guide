@@ -1,0 +1,13 @@
+---
+import ChapterPage from "../components/ChapterPage.astro";
+import TestPlan from "../content/chapters/test-plan.mdx";
+---
+
+<ChapterPage
+  title="Test one idea"
+  active="test-plan"
+  previous={{ href: "reference-list", title: "Example list" }}
+  next={{ href: "sources", title: "Sources" }}
+>
+  <TestPlan />
+</ChapterPage>

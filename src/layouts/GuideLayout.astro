@@ -1,15 +1,43 @@
 ---
 import "../styles/guide.css";
 
+interface Neighbor {
+  href: string;
+  title: string;
+}
+
 interface Props {
-  title?: string;
+  title: string;
+  active: string;
+  home?: boolean;
+  previous?: Neighbor;
+  next?: Neighbor;
   description?: string;
 }
 
 const {
-  title = "Build a Plan, Not a Fixed List — Robin / Bangkok",
+  title,
+  active,
+  home = false,
+  previous,
+  next,
   description = "A practical, evidence-led guide to building and testing Green/Yellow Robin.",
 } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const chapters = [
+  ["home", "Overview", ""],
+  ["core-ideas", "Core ideas", "core-ideas"],
+  ["build-styles", "Build styles", "build-styles"],
+  ["tech-cards", "Tech cards", "tech-cards"],
+  ["rocks", "vs Rocks", "rocks"],
+  ["rg-luffy", "vs RG Luffy", "rg-luffy"],
+  ["play-lines", "Play lines", "play-lines"],
+  ["reference-list", "Example list", "reference-list"],
+  ["test-plan", "Test plan", "test-plan"],
+  ["sources", "Sources", "sources"],
+];
 ---
 
 <!doctype html>
@@ -19,56 +47,73 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#10251f" />
     <meta name="description" content={description} />
-    <title>{title}</title>
+    <title>{title} — Robin / Bangkok</title>
   </head>
   <body>
     <div class="mast">
       <div class="wrap mast-inner">
-        <span>Field notes / EB05-010</span>
+        <a href={base}>Field notes / EB05-010</a>
         <span>Bangkok · 21—22 Nov 2026</span>
       </div>
     </div>
-    <header class="hero">
+    <header class:list={["hero", { "hero--home": home, "hero--chapter": !home }]}>
       <div class="wrap hero-grid">
         <div>
           <div class="eyebrow">One Piece Card Game · Tournament field guide</div>
-          <h1>Build a plan,<br /><em>not a fixed list.</em></h1>
-          <p class="dek">
-            A thinking guide for EB05-010 Green/Yellow Robin into Blue Rocks and
-            Red/Green Luffy. Start with the problem you want to solve. Pick cards
-            for that job. Change your mind when your games give you a reason.
-          </p>
-          <div class="notice">
-            <strong>Use the list as a starting point, not a rule.</strong>
-            Matchup ideas need testing. Public game totals cannot promise a
-            tournament result.
-          </div>
+          {home ? (
+            <>
+              <h1>Build a plan,<br /><em>not a fixed list.</em></h1>
+              <p class="dek">
+                A thinking guide for EB05-010 Green/Yellow Robin into Blue Rocks
+                and Red/Green Luffy. Start with the problem you want to solve.
+                Pick cards for that job. Change your mind when your games give
+                you a reason.
+              </p>
+              <div class="notice">
+                <strong>Use the list as a starting point, not a rule.</strong>
+                Matchup ideas need testing. Public game totals cannot promise a
+                tournament result.
+              </div>
+            </>
+          ) : (
+            <>
+              <p class="chapter-back"><a href={base}>← All chapters</a></p>
+              <h1>{title}</h1>
+            </>
+          )}
         </div>
-        <aside class="event-box">
-          <strong>Bangkok BANDAI Fest</strong>
-          <b>Nov 21–22, 2026</b>
-          <small>Championship 1-on-1 · Gunslinger · Flagship EX</small>
-          <p class="fine">
-            Before you register, ask the event organizer about the format, entry
-            deadline, and rules.
-          </p>
-        </aside>
+        {home && (
+          <aside class="event-box">
+            <strong>Bangkok BANDAI Fest</strong>
+            <b>Nov 21–22, 2026</b>
+            <small>Championship 1-on-1 · Gunslinger · Flagship EX</small>
+            <p class="fine">
+              Before you register, ask the event organizer about the format,
+              entry deadline, and rules.
+            </p>
+          </aside>
+        )}
       </div>
     </header>
     <nav aria-label="Guide chapters">
       <div class="wrap nav-links">
-        <a href="#readout">Why Robin</a>
-        <a href="#roles">Core roles</a>
-        <a href="#fieldguide">Build map</a>
-        <a href="#rocks">vs Rocks</a>
-        <a href="#luffy">vs RG Luffy</a>
-        <a href="#visuals">Play lines</a>
-        <a href="#list">Example list</a>
-        <a href="#testing">Test plan</a>
-        <a href="#sources">Sources</a>
+        {chapters.map(([key, label, path]) => (
+          <a
+            href={`${base}${path ? `${path}/` : ""}`}
+            aria-current={active === key ? "page" : undefined}
+          >
+            {label}
+          </a>
+        ))}
       </div>
     </nav>
     <main class="wrap"><slot /></main>
+    {(previous || next) && (
+      <div class="wrap chapter-pagination">
+        {previous ? <a class="page-link" href={previous.href ? `${base}${previous.href}/` : base}><small>Previous</small><strong>← {previous.title}</strong></a> : <span></span>}
+        {next ? <a class="page-link page-link--next" href={next.href ? `${base}${next.href}/` : base}><small>Next</small><strong>{next.title} →</strong></a> : <a class="page-link page-link--next" href={base}><small>Next</small><strong>Overview →</strong></a>}
+      </div>
+    )}
     <footer class="wrap site-footer">
       Robin Bangkok Field Notes · Personal testing guide · No account or
       browser data included.

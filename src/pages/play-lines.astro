@@ -1,0 +1,13 @@
+---
+import ChapterPage from "../components/ChapterPage.astro";
+import PlayLines from "../content/chapters/play-lines.mdx";
+---
+
+<ChapterPage
+  title="Play lines"
+  active="play-lines"
+  previous={{ href: "rg-luffy", title: "Red/Green Luffy" }}
+  next={{ href: "reference-list", title: "Example list" }}
+>
+  <PlayLines />
+</ChapterPage>
