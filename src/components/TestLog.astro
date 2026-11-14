@@ -1,0 +1,16 @@
+---
+---
+<h3 class="log-heading">Quick session log <span class="fine">(saved only in this browser)</span></h3>
+<form class="log" id="log">
+  <label>Matchup<select name="matchup"><option>Blue Rocks</option><option>RG Luffy</option></select></label>
+  <label>Going<select name="going"><option>First</option><option>Second</option></select></label>
+  <label>Result<select name="result"><option>Win</option><option>Loss</option></select></label>
+  <label>Robin + Nami ready?<select name="engine"><option>Yes</option><option>Partial</option><option>No</option></select></label>
+  <label class="wide">What mattered?<textarea name="note" placeholder="e.g. effect removed Wisdom without KO; spent DON!! before defending"></textarea></label>
+  <div class="wide">
+    <button class="button" type="submit">Save game</button>
+    <button class="button alt" type="button" id="clear">Clear local log</button>
+    <span class="fine" id="logstatus" aria-live="polite"></span>
+  </div>
+</form>
+<div id="entries" class="fine log-entries" aria-live="polite"></div>

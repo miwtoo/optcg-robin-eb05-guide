@@ -1,0 +1,78 @@
+---
+import "../styles/guide.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Build a Plan, Not a Fixed List — Robin / Bangkok",
+  description = "A practical, evidence-led guide to building and testing Green/Yellow Robin.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10251f" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="mast">
+      <div class="wrap mast-inner">
+        <span>Field notes / EB05-010</span>
+        <span>Bangkok · 21—22 Nov 2026</span>
+      </div>
+    </div>
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">One Piece Card Game · Tournament field guide</div>
+          <h1>Build a plan,<br /><em>not a fixed list.</em></h1>
+          <p class="dek">
+            A thinking guide for EB05-010 Green/Yellow Robin into Blue Rocks and
+            Red/Green Luffy. Start with the problem you want to solve. Pick cards
+            for that job. Change your mind when your games give you a reason.
+          </p>
+          <div class="notice">
+            <strong>Use the list as a starting point, not a rule.</strong>
+            Matchup ideas need testing. Public game totals cannot promise a
+            tournament result.
+          </div>
+        </div>
+        <aside class="event-box">
+          <strong>Bangkok BANDAI Fest</strong>
+          <b>Nov 21–22, 2026</b>
+          <small>Championship 1-on-1 · Gunslinger · Flagship EX</small>
+          <p class="fine">
+            Before you register, ask the event organizer about the format, entry
+            deadline, and rules.
+          </p>
+        </aside>
+      </div>
+    </header>
+    <nav aria-label="Guide chapters">
+      <div class="wrap nav-links">
+        <a href="#readout">Why Robin</a>
+        <a href="#roles">Core roles</a>
+        <a href="#fieldguide">Build map</a>
+        <a href="#rocks">vs Rocks</a>
+        <a href="#luffy">vs RG Luffy</a>
+        <a href="#visuals">Play lines</a>
+        <a href="#list">Example list</a>
+        <a href="#testing">Test plan</a>
+        <a href="#sources">Sources</a>
+      </div>
+    </nav>
+    <main class="wrap"><slot /></main>
+    <footer class="wrap site-footer">
+      Robin Bangkok Field Notes · Personal testing guide · No account or
+      browser data included.
+    </footer>
+    <script src="../scripts/guide.ts"></script>
+  </body>
+</html>

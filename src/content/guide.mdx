@@ -1,0 +1,384 @@
+import BuildMap from "../components/BuildMap.astro";
+import ChoiceCard from "../components/ChoiceCard.astro";
+import DeckReference from "../components/DeckReference.astro";
+import TechCard from "../components/TechCard.astro";
+import TestLog from "../components/TestLog.astro";
+import VisualLessons from "../components/VisualLessons.astro";
+
+export const cardImage = (id) =>
+  `https://onepiecetopdecks.com/wp-content/gallery/${id.slice(0, 4).toLowerCase()}/${id}.jpg`;
+
+export const lessons = [
+  {
+    key: "A / Six-cost Robin",
+    title: "Play Nami from hand",
+    subtitle: "Robin costs six DON!!",
+    card: "EB05-016",
+    cardName: "Nico Robin",
+    kind: "robin",
+    steps: [
+      "Start with Nico Robin and Nami in your hand. Have six DON!! active.",
+      "Play the six-cost Nico Robin. Spend six DON!!.",
+      "Robin's On Play effect plays Nami from your hand. Nami costs five and has Wisdom.",
+      "Nami's On Play effect puts the top card of your deck on top of your life. Your leader must have Wisdom.",
+    ],
+  },
+  {
+    key: "B / Robin leader",
+    title: "Two separate rules",
+    subtitle: "KO life · restand power limit",
+    card: "EB05-010",
+    cardName: "Nico Robin leader",
+    kind: "leader",
+    steps: [
+      "A Wisdom character without Blocker is KO'd. Robin's once-per-turn leader effect can trigger.",
+      "Put the top card of your deck on top of your life. Bounce, bottom-deck, or trash is not a KO.",
+      "Separate line: set one rested Wisdom character with current power 6,000 or less as active once per turn.",
+      "Check power before restand. If DON!! would raise it over 6,000, restand first, then attach DON!!.",
+    ],
+  },
+  {
+    key: "C / Megalo",
+    title: "On play, not on restand",
+    subtitle: "It needs a rested target",
+    card: "EB04-018",
+    cardName: "Megalo",
+    kind: "megalo",
+    steps: [
+      "Check for an opposing character that is already rested and has 8,000 power or less.",
+      "Play Megalo for four DON!!. Its On Play effect may rest Megalo itself.",
+      "KO the rested target. If no legal target exists, this removal line is not available.",
+      "Restanding Megalo does not repeat its On Play effect. It cannot attack the turn it enters play unless an effect allows it.",
+    ],
+  },
+  {
+    key: "D / RG Luffy defense",
+    title: "Power math each battle",
+    subtitle: "Toggle the attack size",
+    card: "OP13-001",
+    cardName: "Monkey D. Luffy leader",
+    kind: "luffy",
+    steps: [
+      "Check the condition: one or more DON!! attached to Luffy, and five or fewer active DON!!.",
+      "DON!!×1 is the attached-DON!! condition, not a payment. Rest one active DON!! to add 2k: 5k becomes 7k, enough to stop 6k.",
+      "Against 8k, rest two active DON!! for +4k: 5k becomes 9k. Each use is for this battle only; the ability is not once per turn.",
+    ],
+  },
+  {
+    key: "E / Shanks",
+    title: "Rest the board, not the leader",
+    subtitle: "10-cost · 12k · Rush",
+    card: "OP17-022",
+    cardName: "Shanks",
+    kind: "shanks",
+    steps: [
+      "Have ten DON!! to play Shanks. A normal four-cost Megalo does not also fit this turn.",
+      "Play 10-cost Shanks. It has Rush. Its On Play reactivates up to two DON!!, then rests all opposing characters.",
+      "It rests characters, not the opposing leader. It does not KO or remove those characters.",
+      "Use Shanks' Rush attack. Keep reopened DON!! for a defensive event if that is your plan.",
+    ],
+  },
+];
+
+<section class="section" id="readout">
+  <div class="section-head">
+    <div><div class="kicker">01 / Why Robin</div><h2>Access, board, and life.</h2></div>
+    <p class="subtle">A plan for turning a good hand into choices on later turns.</p>
+  </div>
+  <div class="callout">
+    <strong>The working idea:</strong> one set of cards can link search, board, and life.
+    Six-cost Nico Robin can bring Nami from hand. Nami can put the top card of your deck
+    on top of your life. Once per turn, Robin's leader can do the same when a Wisdom
+    character without Blocker is KO'd. This can help you keep playing—but costs turns
+    and DON!!, and is not proof of a good matchup.
+  </div>
+  <div class="cards spaced">
+    <article class="panel">
+      <h3>What the numbers say</h3>
+      <div class="stat"><b>52.8%</b><span>Robin overall · 62,464 games · 4,823 players</span></div>
+      <p>Ranked, 7-day view, updated Nov 11, 2026.</p>
+    </article>
+    <article class="panel">
+      <h3>What the numbers cannot say</h3>
+      <p><strong>46%</strong> vs RG Luffy (7,707 games; first 46.4%, second 46.5%) and
+      <strong>48%</strong> vs Rocks (6,040 games; first 47.9%, second 47.8%). The data
+      does not control for the exact list, player, or event.</p>
+      <p>Use these as reasons to practice—not as proof the matchups are bad or that one
+      list is best.</p>
+    </article>
+  </div>
+  <div class="split spaced">
+    <article class="panel"><h3>Ask before a turn</h3><p>What do I need to do now: find a missing engine card, keep a useful body, answer a threat, or save DON!! for defense?</p></article>
+    <article class="panel"><h3>Then name the cost</h3><p>Every choice uses something: DON!!, a card from hand, a turn of setup, or space for another answer. A strong plan sees both the gain and the cost.</p></article>
+  </div>
+</section>
+
+<section class="section" id="roles">
+  <div class="section-head">
+    <div><div class="kicker">02 / Card jobs and trade-offs</div><h2>Choose a job. Choose a card.</h2></div>
+    <p class="subtle">These are options to think about, not required counts. Open a card to see what it adds, what it costs, and what to watch in testing.</p>
+  </div>
+  <div class="choice-grid">
+    <ChoiceCard title="Find the right cards" subtitle="Atlas · Lilith">
+      <p><b>Problem:</b> your opening hand cannot reach the part you need.</p>
+      <p><b>Candidate cards:</b> Atlas costs one and looks at the top four for a Wisdom character. Lilith also costs one and looks at the top four for a Trigger card other than Lilith. Nico Robin and Nami fit both search rules.</p>
+      <p><b>Gain:</b> more looks at the engine pieces you need. <b>Give up:</b> a searcher takes a slot that could be defense or a threat, and can feel weak when you already have the pieces.</p>
+      <p><b>Test:</b> record what each search finds and what you still lack. <b>Change your mind if:</b> searches often miss the needed role, or you keep drawing searchers without a useful next play.</p>
+    </ChoiceCard>
+    <ChoiceCard title="Build the Robin–Nami line" subtitle="Six-cost Robin · Nami">
+      <p><b>Problem:</b> you need to build board and recover life.</p>
+      <p><b>Candidate cards:</b> six-cost Nico Robin can play a cost-five-or-less Wisdom card from hand. Nami is a five-cost Wisdom card. On play, Nami can move the top card of your deck to the top of life when your leader has Wisdom.</p>
+      <p><b>Gain:</b> develop two characters in one turn, then add life. <b>Give up:</b> six DON!! and a Nami in hand. The line may be too slow when you need defense or a different board answer.</p>
+      <p><b>Test:</b> note when Robin and Nami are both ready, and what threat you left unanswered. <b>Change your mind if:</b> the line keeps arriving late or does not help you survive the next turn.</p>
+    </ChoiceCard>
+    <ChoiceCard title="Answer a rested body" subtitle="Megalo">
+      <p><b>Problem:</b> an opposing character is already rested and is at 8,000 power or less.</p>
+      <p><b>Candidate card:</b> Megalo. On play, it may rest itself to KO one legal rested character.</p>
+      <p><b>Gain:</b> remove that target. <b>Give up:</b> four DON!! and a body with a +2,000 counter that you could have kept in hand. No legal target? The on-play removal does not help.</p>
+      <p><b>Test:</b> record how often a legal target exists when you draw Megalo. <b>Change your mind if:</b> it sits in hand as a counter, or the target is usually not rested.</p>
+    </ChoiceCard>
+    <ChoiceCard title="Open a late attack window" subtitle="Shanks">
+      <p><b>Problem:</b> you need a large attacker and a turn with fewer opposing characters ready.</p>
+      <p><b>Candidate card:</b> Shanks is ten cost, 12,000 power, and has Rush. On play, it reactivates up to two of your DON!!, then rests all opposing characters.</p>
+      <p><b>Gain:</b> it can attack that turn and may leave DON!! for a defensive event. It rests characters; it does not KO them or rest the opposing leader. <b>Give up:</b> an expensive card with no counter that may sit in hand early.</p>
+      <p><b>Test:</b> did Shanks create a close, or did you need its slot earlier? <b>Change your mind if:</b> it is still in hand when you lose or there is no useful attack after it rests the board.</p>
+    </ChoiceCard>
+    <ChoiceCard title="Add a blocker in a tight game" subtitle="Trafalgar Law">
+      <p><b>Problem:</b> you need a defensive body or another on-play character.</p>
+      <p><b>Candidate card:</b> Law gains Blocker only when you have one life or less. On play, it may return one of your characters to hand; if you do, play up to one cost-five-or-less character from hand rested.</p>
+      <p><b>Gain:</b> a late Blocker or a way to reuse a useful body. <b>Give up:</b> six DON!!, a character returned from your field, and a new rested body. It has no printed counter.</p>
+      <p><b>Test:</b> record when the life condition is met and what body you returned. <b>Change your mind if:</b> the blocker condition arrives too late or returning a body slows you down.</p>
+    </ChoiceCard>
+    <ChoiceCard title="Draw, gain life, or lower power" subtitle="Sweet 3 Generals">
+      <p><b>Problem:</b> your hand, life, or board needs help on your turn.</p>
+      <p><b>Candidate card:</b> Sweet 3 Generals is a six-cost Slash/Strike character, not Wisdom, with a +1,000 counter. On your turn, its On Play may rest two DON!! to draw one, add up to one top card to life, then give up to two opposing characters −3,000 power for the turn.</p>
+      <p><b>Gain:</b> several useful effects in one card. <b>Give up:</b> two DON!! that cannot fund another play. Six-cost Robin cannot play it.</p>
+      <p><b>Test:</b> record whether the draw, life, or power drop changed the turn. <b>Change your mind if:</b> resting two DON!! leaves no useful follow-up.</p>
+    </ChoiceCard>
+  </div>
+  <p class="fine spaced">A package is a group of cards that solves one job. Add or remove a package to answer a problem you can name. Do not change several jobs at once and guess which change mattered.</p>
+  <p class="fine"><strong>Track the card pool:</strong> how many Wisdom cards Atlas can find; how many Trigger cards Lilith can find; how often your hand has a useful 2,000 counter; and how often high-cost cards arrive before you can use them. Record search results from each game. Do not assume a certain count is best.</p>
+</section>
+
+<section class="section" id="fieldguide">
+  <div class="section-head">
+    <div><div class="kicker">03 / Build map + tech cards</div><h2>Several ways to build Robin.</h2></div>
+    <p class="subtle">These are published examples and text-based choices. They are not a worldwide census, a best-list ranking, or proof against Rocks or Luffy.</p>
+  </div>
+  <div class="sample-note"><b>Read the labels:</b> <span class="evidence">Published event list</span> means a list or finish was reported. <span class="evidence">Simulator list</span> means it appeared in an online deck list or aggregate. <span class="evidence">Text-based test</span> means the card's printed text suggests a job worth testing. None proves the card caused a win.</div>
+  <BuildMap />
+  <h3 class="catalog-heading">Tech cards: read the job and the cost</h3>
+  <p class="subtle">Open a card for its text, what it asks from your list, and the example that put it on this map. Filter by job. This catalog is useful options, not every card that could work.</p>
+  <div class="tech-filter" role="group" aria-label="Filter tech cards">
+    <button type="button" data-tech-filter="all" aria-pressed="true">All cards</button>
+    <button type="button" data-tech-filter="search" aria-pressed="false">Find cards</button>
+    <button type="button" data-tech-filter="life" aria-pressed="false">Life + defense</button>
+    <button type="button" data-tech-filter="pressure" aria-pressed="false">Pressure</button>
+    <button type="button" data-tech-filter="control" aria-pressed="false">Control</button>
+    <button type="button" data-tech-filter="recursion" aria-pressed="false">Trash + return</button>
+    <span id="tech-count" class="fine" aria-live="polite"></span>
+  </div>
+  <div class="tech-grid">
+    <TechCard name="Rayleigh" id="OP14-108" image={cardImage("OP14-108")} role="Yellow · 6 cost · 6,000 Slash · +1,000 counter · Trigger" tags="pressure control" href="https://onepiece.limitlesstcg.com/cards/OP14-108" evidence="Two in Nakaji's published 5–0 list; four in Dalen's Nov 12 winner.">
+      <p><b>Text:</b> On play, if your leader is multicolor and the opponent has three or less life, KO one opposing character with 7,000 or less base power. Its Trigger activates the On Play effect; it does not play Rayleigh.</p>
+      <p><b>Consider if:</b> you want a late answer. <b>Limit:</b> the life and base-power checks matter. It is not Wisdom.</p>
+      <p><b>Build cost:</b> six DON!! and a non-Wisdom slot; it does not fit six-cost Robin or the leader's Wisdom effect.</p>
+    </TechCard>
+    <TechCard name="Teach" id="OP16-119" image={cardImage("OP16-119")} role="Yellow · 8 cost · 10,000 Special · no counter · Trigger" tags="control life" href="https://onepiece.limitlesstcg.com/cards/OP16-119" evidence="OPlay simulator list 2 and Suda's published team-event list.">
+      <p><b>Text:</b> On play, look at the top three cards. Put up to one on top of life and the rest on the bottom. Its Trigger negates one opposing character's effect for the turn, then can KO a character costing five or less. The two targets need not be the same.</p>
+      <p><b>Consider if:</b> you want a large body and a way to stop a character effect. <b>Limit:</b> eight cost, no counter, and not Wisdom. Robin cannot play it.</p>
+    </TechCard>
+    <TechCard name="Borsalino" id="EB04-058" image={cardImage("EB04-058")} role="Yellow · 5 cost · 6,000 Special · +1,000 counter · Blocker" tags="life control" href="https://onepiece.limitlesstcg.com/cards/EB04-058" evidence="Two in the OPlay simulator list 2 and Dalen's winning list.">
+      <p><b>Text:</b> Blocker. On play, if you have two or less life, add up to one top card of your deck to life.</p>
+      <p><b>Consider if:</b> a body that can block and restore life helps your plan. <b>Limit:</b> the life check is late; Borsalino is not Wisdom.</p>
+      <p><b>Build cost:</b> Robin cannot play it, though Law can play this five-cost card rested. It does not qualify for Robin's Wisdom effect.</p>
+    </TechCard>
+    <TechCard name="Nico Olvia" id="EB05-056" image={cardImage("EB05-056")} role="Yellow · 1 cost · 0 power · Wisdom · +2,000 counter · Trigger" tags="life search" href="https://onepiece.limitlesstcg.com/cards/EB05-056" evidence="OPlay simulator lists and Dalen's published winner.">
+      <p><b>Text:</b> On play, trash one Trigger card from hand. If your leader is Nico Robin, draw two. Its Trigger plays Olvia.</p>
+      <p><b>Consider if:</b> you want to turn a Trigger in hand into cards. <b>Limit:</b> you need both the right hand card and Nico Robin as leader; the On Play cost is real.</p>
+      <p><b>Build cost:</b> a low-power body, but it is Wisdom and a +2,000 counter.</p>
+    </TechCard>
+    <TechCard name="Baby 5" id="OP12-112" image={cardImage("OP12-112")} role="Yellow · 4 cost · 5,000 Special · +2,000 counter · Trigger" tags="life" href="https://onepiece.limitlesstcg.com/cards/OP12-112" evidence="Four in the OPlay simulator list 2.">
+      <p><b>Text:</b> its Trigger draws two if your leader is multicolor. The Trigger does not play Baby 5.</p>
+      <p><b>Consider if:</b> you value a +2,000 counter and a possible hand refill. <b>Limit:</b> the Trigger draws but adds no body. Baby 5 is not Wisdom.</p>
+      <p><b>Build cost:</b> a four-cost yellow slot outside Robin's free-play line.</p>
+    </TechCard>
+    <TechCard name="Clover" id="OP09-102" image={cardImage("OP09-102")} role="Yellow · 1 cost · 0 power · Wisdom · +2,000 counter · Trigger" tags="search" href="https://onepiece.limitlesstcg.com/cards/OP09-102" evidence="Four in the OPlay simulator list 3.">
+      <p><b>Text:</b> On Play, if your leader is Nico Robin, look at the top three cards and reveal up to one Trigger card to add to hand; put the rest on the bottom. Its Trigger activates the On Play effect; it does not play Clover.</p>
+      <p><b>Consider if:</b> you want a low-cost Wisdom body that can find a Trigger. <b>Limit:</b> needs a Robin leader and a Trigger in those three cards.</p>
+      <p><b>Build cost:</b> a slot that could be a different searcher or defense.</p>
+    </TechCard>
+    <TechCard name="Nami" id="EB03-053" image={cardImage("EB03-053")} role="Yellow · 5 cost · 6,000 Special · +1,000 counter · no Trigger" tags="pressure life" href="https://onepiece.limitlesstcg.com/cards/EB03-053" evidence="Four in Nakaji's published 5–0 list.">
+      <p><b>Text:</b> On play, give up to one rested DON!! to your leader. If the opponent has three or more life, add up to one top card of their life to their hand. On KO, you may turn your top life card face up to play a character from hand with current power 6,000 or less.</p>
+      <p><b>Consider if:</b> this pressure and On KO play fit your turn. <b>Limit:</b> the opponent gets a card from life to hand; it is not damage.</p>
+      <p><b>Build cost:</b> not Wisdom, so Robin cannot play it; Law can play a five-cost Nami rested. Its On KO needs a top life card and a legal character.</p>
+    </TechCard>
+    <TechCard name="Monkey D. Luffy" id="OP15-119" image={cardImage("OP15-119")} role="Yellow · 5 cost · 7,000 Strike · no counter · no Trigger" tags="pressure" href="https://onepiece.limitlesstcg.com/cards/OP15-119" evidence="Two in Nakaji's published 5–0 list.">
+      <p><b>Text:</b> gains Rush if you have six or more DON!! on the field. When the opponent activates an Event or Blocker, reveal up to one top life card and gain +1,000 power for each cost on it this turn.</p>
+      <p><b>Consider if:</b> you want another way to attack late. <b>Limit:</b> no counter, not Wisdom, and a leader ability is not an Event or Blocker. The RG Luffy leader's defense alone will not trigger this power increase.</p>
+      <p><b>Build cost:</b> a five-cost, non-Wisdom pressure slot.</p>
+    </TechCard>
+    <TechCard name="Perona" id="OP14-111" image={cardImage("OP14-111")} role="Yellow · 4 cost · 5,000 Special · +1,000 counter · Trigger" tags="control recursion" href="https://onepiece.limitlesstcg.com/cards/OP14-111" evidence="Suda's listed 5–0 Heroines Cup 3v3 team list; not open-field 1v1 proof.">
+      <p><b>Text:</b> On play or KO, an opposing character costing six or less cannot attack until the end of the opponent's next End Phase. Its Trigger plays a Thriller Bark character costing four or less from trash, rested.</p>
+      <p><b>Consider if:</b> delaying an attack buys the turn you need. <b>Limit:</b> it does not rest or remove the character. It does not clear Captain John's redirect effect.</p>
+      <p><b>Build cost:</b> a Thriller Bark slot; its Trigger needs a legal card in trash.</p>
+    </TechCard>
+    <TechCard name="Dr. Hogback" id="OP14-110" image={cardImage("OP14-110")} role="Yellow · 4 cost · 5,000 Wisdom · +1,000 counter · Trigger" tags="recursion life" href="https://onepiece.limitlesstcg.com/cards/OP14-110" evidence="Suda's listed 5–0 team event list.">
+      <p><b>Text:</b> On KO, play a Trigger character costing four or less from trash, except Dr. Hogback. Its Trigger plays a Thriller Bark character costing four or less from trash, rested.</p>
+      <p><b>Consider if:</b> you want an On KO effect and have legal cards to return. It is Wisdom, so check Robin's normal power and Blocker conditions.</p>
+      <p><b>Limit / build cost:</b> depends on cards in trash and several package slots. Non-KO removal does not activate On KO.</p>
+    </TechCard>
+    <TechCard name="Gecko Moria" id="OP14-104" image={cardImage("OP14-104")} role="Yellow · 8 cost · 10,000 Special · no counter · Trigger" tags="recursion life" href="https://onepiece.limitlesstcg.com/cards/OP14-104" evidence="Suda's listed 5–0 team event list.">
+      <p><b>Text:</b> On Play, choose up to one cost-four-or-less Thriller Bark character from trash: play it or add that character to the top of your life face up. Its Trigger plays a cost-four-or-less character from trash.</p>
+      <p><b>Consider if:</b> your list has useful Thriller Bark cards in trash. <b>Limit:</b> eight DON!! and a package of other cards.</p>
+      <p><b>Rules note:</b> check official rules before planning around a face-up Life card's later Trigger. This guide does not assume face-up Life still triggers.</p>
+    </TechCard>
+    <TechCard name="Oven" id="OP17-102" image={cardImage("OP17-102")} role="Yellow · 4 cost · 4,000 Special · +1,000 counter · Trigger" tags="recursion" href="https://onepiece.limitlesstcg.com/cards/OP17-102" evidence="OPlay simulator list 3; the list alone does not explain its job.">
+      <p><b>Text:</b> On KO, play one character with current power 4,000 or less from trash, except Charlotte Oven. Its Trigger plays Oven.</p>
+      <p><b>Consider if:</b> you want to reuse a small character. <b>Limit:</b> the On KO effect does not happen if Oven leaves another way; it is not restricted to Trigger characters or cost-four cards.</p>
+      <p><b>Build cost:</b> a four-cost character slot that is not itself Wisdom.</p>
+    </TechCard>
+    <TechCard name="Charlotte Linlin" id="OP17-112" image={cardImage("OP17-112")} role="Yellow · 10 cost · 12,000 Special · no counter · no Trigger" tags="life pressure" href="https://onepiece.limitlesstcg.com/cards/OP17-112" evidence="Baseline Toryu list and OPlay simulator list 3.">
+      <p><b>Text:</b> on your turn, your Trigger characters with 4,000 base power become 8,000 base power. On Play, draw one, then choose: add one life or add the opponent's top life card to their hand.</p>
+      <p><b>Consider if:</b> your Trigger characters and life choice fit the board. <b>Limit:</b> the power change is only on your turn; Linlin is ten cost, has no counter, and is not Wisdom.</p>
+      <p><b>Build cost:</b> high-end curve slots. Its increase can put an eligible Wisdom character above Robin's 6,000 restand limit while it lasts.</p>
+    </TechCard>
+    <TechCard name="Nico Robin" id="EB03-055" image={cardImage("EB03-055")} role="Yellow · 7 cost · 8,000 Strike · no counter · no Trigger" tags="life control" href="https://onepiece.limitlesstcg.com/cards/EB03-055" evidence="Two in the OPlay simulator list 2.">
+      <p><b>Text:</b> On Play, you may trash your top life card; if your leader is Straw Hat, add up to two cards from deck top to life. On the opponent's turn, when this character is KO'd, you may deal one damage to the opponent.</p>
+      <p><b>Consider if:</b> the extra life and optional KO effect fit your plan. <b>Limit:</b> paying one life to add up to two is not the same as healing two for free; it needs a top life card.</p>
+      <p><b>Build cost:</b> seven DON!! and a non-Wisdom slot. It is not a free play for six-cost Robin.</p>
+    </TechCard>
+  </div>
+  <p id="tech-empty" class="fine" hidden>No cards in this filter.</p>
+  <p class="source-note">Images: One Piece Top Decks card gallery. Card IDs link to Limitless text pages. The lists above are samples, not a census.</p>
+</section>
+
+<section class="section" id="rocks">
+  <div class="section-head">
+    <div><div class="kicker">04 / Think through Blue Rocks</div><h2>Plan for what you see.</h2></div>
+    <p class="subtle">Treat non-KO interaction as a question to prepare for, not a claim that every Rocks list uses it.</p>
+  </div>
+  <div class="callout"><span class="tag">CARD RULE</span> If a Wisdom body leaves without being KO'd, Robin's leader does not add life. <strong>Question:</strong> how much value did the body already give you, and what will you do if it leaves?</div>
+  <div class="cards rocks-card-grid spaced">
+    <article class="panel">
+      <div class="rocks-card-head"><img src={cardImage("OP17-045")} alt="Kyo OP17-045 card art" loading="lazy" /><h3>Kyo · OP17-045</h3></div>
+      <p><b>Rule:</b> On Play, draw one. If one of your characters would be removed by an opponent's effect, Kyo can let you trash two cards from hand to stop it. This can cover KO, bottom-deck, or bounce effects. It does not replace a KO in battle.</p>
+      <p><b>Choice:</b> is saving this body worth two cards from hand? Count Kyo's actual hand cost before calling a removal line.</p>
+      <a href="https://onepiece.limitlesstcg.com/cards/OP17-045" target="_blank" rel="noopener">Card text ↗</a>
+    </article>
+    <article class="panel">
+      <div class="rocks-card-head"><img src={cardImage("OP17-044")} alt="Captain John OP17-044 card art" loading="lazy" /><h3>Captain John · OP17-044</h3></div>
+      <p><b>Rule:</b> with a Rocks Pirates leader, if John is rested, the opposing player can attack only Captain John. This restriction includes leader attacks. Its Main effect can rest John to draw one and trash one.</p>
+      <p><b>Choice:</b> check John before Shanks. Shanks rests all opposing characters, which can rest John and turn on the attack restriction. Do not assume you can rest the board and then attack their leader.</p>
+      <a href="https://onepiece.limitlesstcg.com/cards/OP17-044" target="_blank" rel="noopener">Card text ↗</a>
+    </article>
+    <article class="panel">
+      <div class="rocks-card-head"><img src={cardImage("OP17-046")} alt="Gloriosa OP17-046 card art" loading="lazy" /><h3>Gloriosa · OP17-046</h3></div>
+      <p><b>Rule:</b> Blue, four cost, 1,000 power, Wisdom, Blocker. On Play, put up to one character costing five or less on the bottom of its owner's deck. It can target either player's character. This is not a KO.</p>
+      <p><b>Choice:</b> it cannot target six-cost Nico Robin. It can target a five-cost Wisdom body and does not trigger Robin's KO life effect. This Blue card is an opposing threat, not a legal Robin deck suggestion.</p>
+      <a href="https://onepiece.limitlesstcg.com/cards/OP17-046" target="_blank" rel="noopener">Card text ↗</a>
+    </article>
+  </div>
+  <p class="fine"><span class="tag">IDEAS TO TEST</span> These are decisions to practice. They do not assume what every Rocks list will do.</p>
+  <div class="decision-grid">
+    <article class="decision"><span class="tag">IF</span><h3>Your hand cannot reach the engine</h3><p><b>Consider:</b> use a search card for the missing part, not a card you already hold.</p><p><b>Cost:</b> the searcher uses a deck slot and may not answer the board.</p><p><b>Check next turn:</b> did the search find Robin or Nami, and did you have time to use it?</p></article>
+    <article class="decision"><span class="tag">IF</span><h3>You expect a body may leave without a KO</h3><p><b>Consider:</b> whether its On Play already gave you enough value. Keep a second play ready if losing that body would stop your plan.</p><p><b>Cost:</b> holding a card can slow your board. Playing it now can give the opponent a useful target.</p><p><b>Check next turn:</b> what effect actually removed it? Did it KO, return, bottom-deck, or trash it?</p></article>
+    <article class="decision"><span class="tag">IF</span><h3>You want to use Megalo</h3><p><b>Consider:</b> attack first if that can leave a useful opposing character rested. Megalo can only KO a rested character at 8,000 power or less.</p><p><b>Cost:</b> four DON!! instead of keeping Megalo as a +2,000 counter.</p><p><b>Check next turn:</b> was there a legal target? Did removing it change the board or the clock?</p></article>
+    <article class="decision"><span class="tag">IF</span><h3>You are thinking about Shanks</h3><p><b>Consider:</b> can the Rush attack close the game, or does resting their characters make your next turn safer? The leader stays active.</p><p><b>Cost:</b> ten DON!! and a card that may be hard to use early. It rests characters; it does not remove them.</p><p><b>Choose:</b> spend one returned DON!! on Shanks or keep one active for OP14-118. The event needs two life or less and an active opposing character. You cannot play four-cost Megalo in the same normal 10-DON!! turn.</p></article>
+  </div>
+  <p class="fine">Do not assume a particular Rocks answer. Write down the card and effect you saw, then decide whether your plan should change.</p>
+</section>
+
+<section class="section" id="luffy">
+  <div class="section-head">
+    <div><div class="kicker">05 / Think through RG Luffy</div><h2>Count the defense they can buy.</h2></div>
+    <p class="subtle">Then choose an attack and a defense plan. No line is always right.</p>
+  </div>
+  <p class="fine"><span class="tag">CARD RULE</span> The math below assumes an unmodified 5,000-power Luffy leader.</p>
+  <div class="split">
+    <article class="panel">
+      <h3>Check the leader condition</h3>
+      <p>Luffy needs DON!!×1 attached and five or fewer active DON!!. During each opponent's attack, Luffy may rest any number of active DON!! to gain +2,000 power for each one for that battle. Choose Luffy or one Straw Hat character. It can use the effect again in another battle. With more than five active DON!!, the effect is not available unless that count changes. DON!!×1 is a condition, not a payment.</p>
+      <p>Against an unmodified 5,000-power Luffy:</p>
+      <div class="math">5k or 6k attack → 1 rested DON!! can raise Luffy to 7k.<br />7k or 8k attack → 2 rested DON!! can raise Luffy to 9k.<br />Other power changes, counters, or taking the hit can change the result.</div>
+    </article>
+    <article class="panel">
+      <h3>Compare wide and tall attacks</h3>
+      <p>A 5k attack plus one DON!! becomes 6k. That does not ask Luffy to rest more DON!! than a 5k attack: one can still raise Luffy to 7k.</p>
+      <p>A 5k attack plus two DON!! becomes 7k. Luffy may need to rest two DON!! to reach 9k instead of one. But Luffy can use a counter or take the hit instead. You are not forcing a DON!! spend.</p>
+    </article>
+  </div>
+  <p class="fine spaced"><span class="tag">IDEAS TO TEST</span> The best attack depends on your life, board, and the DON!! still active.</p>
+  <div class="decision-grid">
+    <article class="decision"><span class="tag">IF</span><h3>You want several attacks</h3><p><b>Consider:</b> several attacks may ask Luffy to choose where to spend its remaining DON!!.</p><p><b>Cost:</b> small attacks may still be covered by the same power boost. You may get no extra DON!! value from adding only one DON!!.</p><p><b>Check next turn:</b> how many active DON!! did Luffy have for the next battle?</p></article>
+    <article class="decision"><span class="tag">IF</span><h3>You want one big attack</h3><p><b>Consider:</b> two DON!! on a 5k attacker makes 7k and may ask for two rested DON!! to reach 9k against a 5k leader.</p><p><b>Cost:</b> DON!! spent on attack is not available for another play. Luffy can still counter or take the hit.</p><p><b>Check next turn:</b> did the larger attack change their choice or protect your board?</p></article>
+    <article class="decision"><span class="tag">IF</span><h3>Your Wisdom body may be KO'd</h3><p><b>Consider:</b> if Robin's once-per-turn life effect is still available. It only works when a Wisdom character without Blocker is KO'd—not when it leaves another way.</p><p><b>Cost:</b> taking a hit can risk life or lethal. Spending a counter can use a card that protects another turn.</p><p><b>Check next turn:</b> was the life gain worth the body, or was the body more useful alive?</p></article>
+    <article class="decision"><span class="tag">IF</span><h3>Choose an attack target</h3><p><b>Consider:</b> whether a character or leader attack helps more. Check the board before you spend DON!!.</p><p><b>Cost:</b> an attack at the leader may speed your clock; a character attack may reduce their next turn.</p><p><b>Check next turn:</b> which target gave you the better next turn?</p></article>
+  </div>
+</section>
+
+<section class="section" id="visuals">
+  <div class="section-head">
+    <div><div class="kicker">06 / Learn the card lines</div><h2>See the move.</h2></div>
+    <p class="subtle">Press “Play steps” or use Next. The short lesson still makes sense with animation off.</p>
+  </div>
+  <p class="visual-intro">These diagrams show the card and the choices around it. They use real card art. Press Play once to watch one short sequence. Press Pause to stop it. Use Replay to start again.</p>
+  <VisualLessons lessons={lessons} />
+  <p class="source-note">Card images are hosted by <a href="https://onepiecetopdecks.com/" target="_blank" rel="noopener">One Piece Top Decks</a>. Each image is labeled with its card ID.</p>
+</section>
+
+<section class="section" id="list">
+  <div class="section-head">
+    <div><div class="kicker">07 / One published example</div><h2>A reference, not a recipe.</h2></div>
+    <p class="subtle">This is one published list that won Toryu Aichi on Nov 8. Use it to see one way the cards fit together. You can change it to fit your plan.</p>
+  </div>
+  <DeckReference />
+  <div class="cards spaced">
+    <article class="panel"><h3>How this list fits together</h3><p>Play low-cost Wisdom characters to find six-cost Nico Robin and Nami. Then use your characters and DON!! to keep pressure on the opponent. Keep more than one play available. Change your play when the opponent has a way to stop it.</p></article>
+    <article class="panel"><h3>What this result does not prove</h3><p>This list gives you one concrete starting point. The popular-list result is 54.1% over 5,300 games and 744 players overall. This does not show its win rate against either target deck. It does not prove that it is the best list for Bangkok.</p></article>
+  </div>
+</section>
+
+<section class="section" id="rules">
+  <div class="section-head">
+    <div><div class="kicker">08 / Quick rules check</div><h2>Follow the card text.</h2></div>
+    <p class="subtle">Check the card text in the language and version you use. These reminders do not replace a judge's ruling.</p>
+  </div>
+  <div class="cards">
+    <article class="panel"><h3>Robin leader</h3><p>Once per turn, when your Wisdom character <strong>without Blocker</strong> is KO'd, you may put the top card of your deck on top of your life. This effect does not work if the character has Blocker. It also does not work if an effect returns it to hand, puts it under the deck, or trashes it.</p></article>
+    <article class="panel"><h3>Restand cap</h3><p>Once per turn, set one rested Wisdom character with current power 6,000 or less as active. Check its current power when you use this effect. An earlier power increase can put it over 6,000. If a DON!! would put it over the limit, set it as active first. You can attack again only if it can legally attack. This effect does not let a character attack on the turn it enters play.</p></article>
+    <article class="panel"><h3>Six-cost Nico Robin</h3><p><strong>[Your Turn] [On Play]</strong> Play up to one <strong>Wisdom</strong> character that costs 5 or less from your hand. Choose a card that meets this limit.</p></article>
+    <article class="panel"><h3>Megalo</h3><p>When you play Megalo, you may rest it to KO one opposing rested character with 8,000 power or less. The target must already be rested. You cannot use this effect again by setting Megalo as active. Megalo cannot attack on the turn it enters play unless an effect allows it.</p></article>
+    <article class="panel"><h3>Shanks</h3><p>OP17-022 is a 10-cost, 12k Rush character. When you play it, set up to two of your DON!! as active. Then rest all opposing characters. You can save the active DON!! for a defensive event. Check your DON!! before you plan to play Shanks and a 4-cost Megalo in one turn.</p></article>
+    <article class="panel"><h3>Law / event / Sweet 3</h3><p>OP13-031 Law has Blocker only when you have one life or less. On play, it may return one of your characters to your hand. Then you may play a character that costs 5 or less from your hand, rested. OP14-118 Counter works only when you have two life or less and an active opposing character. Sweet 3 Generals is six-cost, not Wisdom, and its On Play rests two DON!!.</p></article>
+  </div>
+  <div class="callout spaced"><strong>Before you play Shanks:</strong> check which opposing characters it can rest. Decide what you will do next. Resting a character does not remove it. Before you use Megalo, check that you can play it and that its target is already rested and has 8,000 power or less. Setting Megalo as active does not repeat its On Play effect.</div>
+</section>
+
+<section class="section" id="testing">
+  <div class="section-head">
+    <div><div class="kicker">09 / Test one idea</div><h2>Change your mind with evidence.</h2></div>
+    <p class="subtle">Twenty games per matchup can show a pattern. They cannot prove a win rate.</p>
+  </div>
+  <div class="cards">
+    <article class="panel"><h3>Run a fair comparison</h3><ol class="list"><li>Name one problem: missed engine, weak defense, dead Megalo, or Shanks stuck in hand.</li><li>Write a prediction. Example: “More search will help me find Robin and Nami.”</li><li>Change one package. Keep the rest steady for this comparison—not forever.</li><li>Play both first and second. Use the same opponent and list when you can.</li><li>Compare results, then decide whether to keep, undo, or test another change.</li></ol></article>
+    <article class="panel"><h3>Ask what would change your mind</h3><ul class="list"><li>Did search miss the card you needed, or did you find it too late?</li><li>Did you lose with Robin and Nami ready, or because defense came up short?</li><li>Was Megalo dead because there was no rested target? Was Shanks dead because you could not reach ten DON!!?</li><li>Did the Luffy player rest DON!!, use counter, or take the hit?</li></ul></article>
+  </div>
+  <p class="callout spaced"><strong>Record causes, not just wins.</strong> Separate missed engine, unused cards, removal that did not KO, and defense choices. Ten games first and ten second is a useful diagnostic split, not proof.</p>
+  <TestLog />
+</section>
+
+<section class="section" id="sources">
+  <div class="section-head"><div><div class="kicker">10 / Sources and inspiration</div><h2>Check the source pages.</h2></div></div>
+  <ul class="source-list">
+    <li><a href="https://oplaytcg.com/en/meta-stats?tab=leader&amp;leader=EB05-010" target="_blank" rel="noopener">OPlayTCG — Robin meta stats</a> · Ranked, 7-day view, updated Nov 11, 2026. Aggregate counts and matchup splits cited above.</li>
+    <li><a href="https://onepiecetopdecks.com/deck-list/japan-eb05op18-deck-list-heroines-and-the-dominance-of-god/" target="_blank" rel="noopener">Japan/Asia EB05/OP18 published list roundup</a> · Used for Toryu, Nakaji, Purukoking, and Dalen examples. Published results are not independent copies of one tested list.</li>
+    <li><a href="https://www.pankurecords.com/yonko/decks/jp-eb05-cd30712e73c1" target="_blank" rel="noopener">Suda's posted Heroines Cup list</a> · 3v3 team event; reported 5–0, placing not listed.</li>
+    <li><a href="https://oplaytcg.com/deck-builder?d=2kFAocIGG6IIHSIKCHDLhpw34ccOcAwcMA0ccA4dsBAd8BEFmNuy" target="_blank" rel="noopener">OPlay simulator list 2</a> and <a href="https://oplaytcg.com/deck-builder?d=2kFAobBDhpw34cYBIzcaMAwcMBEFmM3Gvjbxw45Yg" target="_blank" rel="noopener">simulator list 3</a> · Simulator examples, not causal results or matchup proof.</li>
+    <li><a href="https://asia-th.onepiece-cardgame.com/events/bcgfest26-27-bangkok.html" target="_blank" rel="noopener">Official Asia site — Bangkok BANDAI Card Games Fest 26–27</a> · Event dates confirmed; event-specific cutoff and restrictions are not established here.</li>
+    <li>Card text: <a href="https://onepiece.limitlesstcg.com/cards/EB05-010" target="_blank" rel="noopener">Robin leader</a>, <a href="https://onepiece.limitlesstcg.com/cards/EB05-016" target="_blank" rel="noopener">six-cost Robin</a>, <a href="https://onepiece.limitlesstcg.com/cards/EB05-055" target="_blank" rel="noopener">Nami</a>, <a href="https://onepiece.limitlesstcg.com/cards/EB04-018" target="_blank" rel="noopener">Megalo</a>, <a href="https://onepiece.limitlesstcg.com/cards/OP17-022" target="_blank" rel="noopener">Shanks</a>, <a href="https://onepiece.limitlesstcg.com/cards/OP13-001" target="_blank" rel="noopener">RG Luffy</a>, <a href="https://onepiece.limitlesstcg.com/cards/OP13-031" target="_blank" rel="noopener">Law</a>, and <a href="https://onepiece.limitlesstcg.com/cards/OP14-118" target="_blank" rel="noopener">Counter Event</a>. The tech catalog links each card's text directly.</li>
+    <li>Rocks card text: <a href="https://onepiece.limitlesstcg.com/cards/OP17-045" target="_blank" rel="noopener">Kyo</a>, <a href="https://onepiece.limitlesstcg.com/cards/OP17-044" target="_blank" rel="noopener">Captain John</a>, and <a href="https://onepiece.limitlesstcg.com/cards/OP17-046" target="_blank" rel="noopener">Gloriosa</a>.</li>
+  </ul>
+  <p class="fine">Teaching-structure inspiration: <a href="https://metafy.gg/guides/view/by-moria-guide-treasure-cup-9-1-eb05-kmRlBbXK2Bc/1-the-rogue-king-is-here-j8MXvJbQ5h8" target="_blank" rel="noopener">By Moria guide</a>. This Robin guide is original. The link is an example of explaining a deck's plan and card jobs; no Moria matchup advice is used here.</p>
+  <p class="callout"><strong>Limits:</strong> published event lists, simulator lists, and card-text ideas are different kinds of evidence. This is not a worldwide census, the samples do not prove why a card won, and no matchup result is guaranteed.</p>
+</section>

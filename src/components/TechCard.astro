@@ -1,0 +1,29 @@
+---
+interface Props {
+  name: string;
+  id: string;
+  image: string;
+  role: string;
+  tags: string;
+  href: string;
+  evidence?: string;
+}
+
+const { name, id, image, role, tags, href, evidence = "Text-based test" } = Astro.props;
+---
+
+<details class="tech-item" data-tech-card data-tags={tags}>
+  <summary>
+    <img src={image} alt={`${name} ${id} card art`} loading="lazy" />
+    <span>
+      <span class="tech-name">{name}</span>
+      <span class="tech-id">{id}</span>
+      <span class="tech-role">{role}</span>
+    </span>
+  </summary>
+  <div class="tech-body">
+    <slot />
+    <p class="fine"><strong>Evidence:</strong> {evidence}</p>
+    <a href={href} target="_blank" rel="noopener">Card text ↗</a>
+  </div>
+</details>

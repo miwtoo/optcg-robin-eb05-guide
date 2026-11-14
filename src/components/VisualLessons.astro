@@ -1,0 +1,68 @@
+---
+interface Lesson {
+  key: string;
+  title: string;
+  subtitle: string;
+  card: string;
+  cardName: string;
+  steps: string[];
+  kind: "robin" | "leader" | "megalo" | "luffy" | "shanks";
+}
+
+interface Props {
+  lessons: Lesson[];
+}
+
+const { lessons } = Astro.props;
+const gallery = (id: string) =>
+  `https://onepiecetopdecks.com/wp-content/gallery/${id.slice(0, 4).toLowerCase()}/${id}.jpg`;
+---
+
+<label class="motion-setting"><input type="checkbox" id="motion-toggle" /> Motion on</label>
+<div class="lesson-grid">
+  {lessons.map((lesson) => (
+    <article class="lesson" data-lesson data-kind={lesson.kind}>
+      <div class="lesson-top">
+        <img src={gallery(lesson.card)} alt={`${lesson.cardName}, ${lesson.card} card art`} loading="lazy" />
+        <div>
+          <span class="kicker">{lesson.key}</span>
+          <h3>{lesson.title}</h3>
+          <p>{lesson.subtitle}</p>
+        </div>
+      </div>
+      {lesson.kind === "luffy" && (
+        <div class="power-toggle" role="group" aria-label="Choose incoming attack">
+          <span>Incoming attack:</span>
+          <button type="button" data-power="6" aria-pressed="true">6k</button>
+          <button type="button" data-power="8" aria-pressed="false">8k</button>
+        </div>
+      )}
+      <div class="lesson-board">
+        <div class="zone"><div class="zone-name">Card</div><div class="zone-content">
+          <figure class="token on" data-steps="1"><img src={gallery(lesson.card)} alt="" /><figcaption>{lesson.cardName}</figcaption></figure>
+          {lesson.kind === "robin" && <figure class="token" data-steps="2,3,4"><img src={gallery("EB05-055")} alt="" /><figcaption>Nami · 5-cost Wisdom</figcaption></figure>}
+        </div></div>
+        <div class="zone"><div class="zone-name">Board / choice</div><div class="zone-content">
+          <span class="empty-note" data-steps="1">{lesson.kind === "luffy" ? "5k base leader" : "Check the card text"}</span>
+          <span class="rest-chip" data-steps="2,3,4">{lesson.kind === "shanks" ? "Characters rested" : "Effect resolves"}</span>
+        </div></div>
+        <div class="zone"><div class="zone-name">Next step</div><div class="zone-content">
+          <span class="empty-note" data-steps="1">Read the condition</span>
+          <span class="empty-note" data-steps="2,3,4">Name the cost</span>
+        </div></div>
+      </div>
+      {lesson.kind === "luffy" && <p class="math" data-math aria-live="polite"></p>}
+      <ol class="lesson-steps">
+        {lesson.steps.map((step) => <li>{step}</li>)}
+      </ol>
+      <div class="lesson-copy" aria-live="polite"></div>
+      <div class="lesson-controls">
+        <button type="button" data-act="prev">Back</button>
+        <button type="button" data-act="play">Play steps</button>
+        <button type="button" data-act="next">Next</button>
+        <span class="lesson-count"></span>
+      </div>
+      <p class="source-note">Card art: One Piece Top Decks · Card text: {lesson.card}.</p>
+    </article>
+  ))}
+</div>

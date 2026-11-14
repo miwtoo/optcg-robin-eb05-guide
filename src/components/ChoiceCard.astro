@@ -1,0 +1,16 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<details class="choice">
+  <summary>
+    <span class="choice-title">{title}</span>
+    <span class="choice-sub">{subtitle}</span>
+  </summary>
+  <div class="choice-body"><slot /></div>
+</details>
