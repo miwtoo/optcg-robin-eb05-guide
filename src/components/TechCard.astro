@@ -1,4 +1,6 @@
 ---
+import CardArt from "./CardArt.astro";
+
 interface Props {
   name: string;
   id: string;
@@ -22,8 +24,11 @@ const { name, id, image, role, tags, href, evidence = "Text-based test" } = Astr
     </span>
   </summary>
   <div class="tech-body">
-    <slot />
-    <p class="fine"><strong>Evidence:</strong> {evidence}</p>
-    <a href={href} target="_blank" rel="noopener">Card text ↗</a>
+    <CardArt name={name} id={id} size="detail" />
+    <div class="tech-detail-copy">
+      <slot />
+      <p class="fine"><strong>Evidence:</strong> {evidence}</p>
+      <a href={href} target="_blank" rel="noopener">Card text ↗</a>
+    </div>
   </div>
 </details>

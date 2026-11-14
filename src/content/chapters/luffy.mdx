@@ -1,3 +1,5 @@
+import CardArt from "../../components/CardArt.astro";
+
 <section class="section" id="luffy">
   <div class="section-head">
     <div><div class="kicker">05 / Think through RG Luffy</div><h2>Count the defense they can buy.</h2></div>
@@ -7,6 +9,7 @@
   <div class="split">
     <article class="panel">
       <h3>Check the leader condition</h3>
+      <div class="rule-art"><CardArt name="Monkey D. Luffy leader" id="OP13-001" size="rule" /></div>
       <p>Luffy needs DON!!×1 attached and five or fewer active DON!!. During each opponent's attack, Luffy may rest any number of active DON!! to gain +2,000 power for each one for that battle. Choose Luffy or one Straw Hat character. It can use the effect again in another battle. With more than five active DON!!, the effect is not available unless that count changes. DON!!×1 is a condition, not a payment.</p>
       <p>Against an unmodified 5,000-power Luffy:</p>
       <div class="math">5k or 6k attack → 1 rested DON!! can raise Luffy to 7k.<br />7k or 8k attack → 2 rested DON!! can raise Luffy to 9k.<br />Other power changes, counters, or taking the hit can change the result.</div>
@@ -21,7 +24,7 @@
   <div class="decision-grid">
     <article class="decision"><span class="tag">IF</span><h3>You want several attacks</h3><p><b>Consider:</b> several attacks may ask Luffy to choose where to spend its remaining DON!!.</p><p><b>Cost:</b> small attacks may still be covered by the same power boost. You may get no extra DON!! value from adding only one DON!!.</p><p><b>Check next turn:</b> how many active DON!! did Luffy have for the next battle?</p></article>
     <article class="decision"><span class="tag">IF</span><h3>You want one big attack</h3><p><b>Consider:</b> two DON!! on a 5k attacker makes 7k and may ask for two rested DON!! to reach 9k against a 5k leader.</p><p><b>Cost:</b> DON!! spent on attack is not available for another play. Luffy can still counter or take the hit.</p><p><b>Check next turn:</b> did the larger attack change their choice or protect your board?</p></article>
-    <article class="decision"><span class="tag">IF</span><h3>Your Wisdom body may be KO'd</h3><p><b>Consider:</b> if Robin's once-per-turn life effect is still available. It only works when a Wisdom character without Blocker is KO'd—not when it leaves another way.</p><p><b>Cost:</b> taking a hit can risk life or lethal. Spending a counter can use a card that protects another turn.</p><p><b>Check next turn:</b> was the life gain worth the body, or was the body more useful alive?</p></article>
+    <article class="decision"><span class="tag">IF</span><h3>Your Wisdom body may be KO'd</h3><div class="decision-art"><CardArt name="Nico Robin leader" id="EB05-010" size="rule" /></div><p><b>Consider:</b> if Robin's once-per-turn life effect is still available. It only works when a Wisdom character without Blocker is KO'd—not when it leaves another way.</p><p><b>Cost:</b> taking a hit can risk life or lethal. Spending a counter can use a card that protects another turn.</p><p><b>Check next turn:</b> was the life gain worth the body, or was the body more useful alive?</p></article>
     <article class="decision"><span class="tag">IF</span><h3>Choose an attack target</h3><p><b>Consider:</b> whether a character or leader attack helps more. Check the board before you spend DON!!.</p><p><b>Cost:</b> an attack at the leader may speed your clock; a character attack may reduce their next turn.</p><p><b>Check next turn:</b> which target gave you the better next turn?</p></article>
   </div>
 </section>

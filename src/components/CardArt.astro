@@ -1,0 +1,16 @@
+---
+import { cardImage } from "../content/card-images";
+
+interface Props {
+  id: string;
+  name: string;
+  size?: "choice" | "detail" | "list" | "rule";
+}
+
+const { id, name, size = "choice" } = Astro.props;
+---
+
+<figure class:list={["card-art", `card-art--${size}`]}>
+  <img src={cardImage(id)} alt={`${name} ${id} card art`} loading="lazy" />
+  <figcaption><span>{name}</span><code>{id}</code></figcaption>
+</figure>

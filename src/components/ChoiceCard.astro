@@ -1,16 +1,30 @@
 ---
+import CardArt from "./CardArt.astro";
+import { cardImage } from "../content/card-images";
+
 interface Props {
   title: string;
   subtitle: string;
+  cards: { name: string; id: string }[];
 }
 
-const { title, subtitle } = Astro.props;
+const { title, subtitle, cards } = Astro.props;
 ---
 
 <details class="choice">
   <summary>
-    <span class="choice-title">{title}</span>
-    <span class="choice-sub">{subtitle}</span>
+    <span class="choice-summary-art">
+      {cards.map((card) => <img src={cardImage(card.id)} alt={`${card.name} ${card.id} card art`} loading="lazy" />)}
+    </span>
+    <span class="choice-summary-copy">
+      <span class="choice-title">{title}</span>
+      <span class="choice-sub">{subtitle}</span>
+    </span>
   </summary>
-  <div class="choice-body"><slot /></div>
+  <div class="choice-body">
+    <div class="choice-gallery" aria-label={`${title} card art`}>
+      {cards.map((card) => <CardArt {...card} size="choice" />)}
+    </div>
+    <slot />
+  </div>
 </details>

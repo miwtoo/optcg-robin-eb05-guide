@@ -1,4 +1,6 @@
 ---
+import CardArt from "./CardArt.astro";
+
 const cards = [
   ["Leader", "EB05-010", "Nico Robin"],
   ["4× OP09-106", "OP09-106", "Nico Olvia"],
@@ -36,7 +38,7 @@ const deck = [
     </div>
     <pre class="deck" id="deck">{deck.join("\n")}</pre>
     <ul class="card-names" aria-label="Deck card names">
-      {cards.map(([count, id, name]) => <li><b>{count}</b> {id} · {name}</li>)}
+      {cards.map(([count, id, name]) => <li><CardArt name={name} id={id} size="list" /><span><b>{count}</b> {id} · {name}</span></li>)}
     </ul>
   </div>
 </details>
